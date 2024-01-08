@@ -1,0 +1,26 @@
+*{
+    box-sizing: border-box;
+}
+html{
+    scroll-behavior: smooth;
+}
+
+.container__image{
+    width: 100px;
+}
+.img{
+    width: 100%;
+}
+.table{
+    border-collapse: separate !important;
+    border: 1px solid black !important;
+}
+.td{
+    border: 1px solid black !important;
+}
+.error{
+    background-color: tomato;
+    color: red;
+    border: 1px solid red;
+    width: fit-content;
+}
