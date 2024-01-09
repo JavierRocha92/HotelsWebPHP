@@ -1,19 +1,28 @@
 <?php
 class Habitacion{
+    private $id;
     private $id_hotel;
     private $num_habitacion;
     private $tipo;
     private $precio;
     private $descripcion;
     
-    function __construct($id_hotel,$num_habitacion,$tipo,$precio,$descripcion){
-        $this->id_hotel = $id_hotel;
-        $this->num_habitacion = $num_habitacion;
-        $this->tipo = $tipo;
-        $this->precio = $precio;
-        $this->descripcion = $descripcion;
+    function __construct() {
+
     }
-    public function getId_hotel() {
+    
+    public function __toString() {
+        return "Habitación [ID: {$this->id}, ID Hotel: {$this->id_hotel}, Número: {$this->num_habitacion}, Tipo: {$this->tipo}, Precio: {$this->precio}, Descripción: {$this->descripcion}]";
+    }
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setId($id): void {
+        $this->id = $id;
+    }
+
+        public function getId_hotel() {
         return $this->id_hotel;
     }
 

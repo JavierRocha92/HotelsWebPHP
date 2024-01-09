@@ -1,6 +1,6 @@
 <?php
-require './db/Database.php';
+require './controllers/UsuarioController.php';
 
-$bd = new Database();
-$bd->getConnection();
+$controller = new UsuarioController();
+$controller->listUsuarios();
 

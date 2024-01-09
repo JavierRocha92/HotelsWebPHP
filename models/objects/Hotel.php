@@ -9,15 +9,12 @@ class Hotel{
     private $descripcion;
     private $foto;
     
-    function __construct($id,$nombre,$direccion,$ciudad,$pais,$num_habitaciones,$descripcion,$foto){
-        $this->id = $id;
-        $this->nombre =$nombre;
-        $this->direccion =$direccion;
-        $this->ciudad =$ciudad;
-        $this->pais =$pais;
-        $this->num_habitacioes =$num_habitaciones;
-        $this->descripcion = $descripcion;
-        $this->foto =$foto;
+    function __construct(){
+        
+    }
+    
+    public function __toString() {
+        return "Hotel: {$this->nombre}\nID: {$this->id}\nDirección: {$this->direccion}\nCiudad: {$this->ciudad}\nPaís: {$this->pais}\nNúmero de habitaciones: {$this->num_habitaciones}\nDescripción: {$this->descripcion}\nFoto: {$this->foto}";
     }
     
     public function getId() {

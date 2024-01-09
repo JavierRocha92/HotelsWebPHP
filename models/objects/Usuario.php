@@ -6,12 +6,12 @@ class Usuario{
     private $fecha_regsitro;
     private $rol;
     
-    function __construct($id, $nombre, $contraseña, $fecha_registro, $rol){
-        $this->id = $id;
-        $this->nombre = $nombre;
-        $this->contraseña = $contraseña;
-        $this->fecha_regsitro = $fecha_registro;
-        $this->rol = $rol;
+    function __construct(){
+        
+    }
+    
+    public function __toString() {
+        return "Usuario ID: {$this->id}\nNombre: {$this->nombre}\nFecha de registro: {$this->fecha_registro}\nRol: {$this->rol}";
     }
     
     public function getId() {

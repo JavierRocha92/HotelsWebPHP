@@ -7,14 +7,12 @@ class Reserva{
     private $fecha_entrada;
     private $fecha_salida;
     
-    function __contruct($id,$id_usuario,$id_hotel,$id_habitacion,$fecha_entrada,$fecha_salida){
-        $this->id = $id;
-        $this->usuario = $id_usuario;
-        $this->id_hotel = $id_hotel;
-        $this->id_hotel = $id_hotel;
-        $this->id_habitacion = $id_habitacion;
-        $this->fecha_entrada = $fecha_entrada;
-        $this->fecha_salida = $fecha_salida;
+    function __construct(){
+        
+    }
+    
+    public function __toString() {
+        return "Reserva ID: {$this->id}\nUsuario ID: {$this->id_usuario}\nHotel ID: {$this->id_hotel}\nHabitación ID: {$this->id_habitacion}\nFecha de entrada: {$this->fecha_entrada}\nFecha de salida: {$this->fecha_salida}";
     }
     
     public function getId() {
