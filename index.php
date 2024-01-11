@@ -1,9 +1,6 @@
 
 <?php
-//Start session
-session_start();
-//Create Usuario object by taking values from $_SESSION['user'] or null if this variables does not exist
-$user = ($_SESSION['user']) ? $_SESSION['user'] : null;
+
 ?>
 <!doctype html>
 <html lang="en">

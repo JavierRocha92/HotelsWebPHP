@@ -40,7 +40,12 @@ class UsuarioView {
                 </div>
             </div>
             <!--form to enter your data-->
-            <form action = "<?= $_SERVER['PHP_SELF'].'?controller=Usuario&action=checkCredentials' ?>" method = "post" class = "center_column form form--login">
+            <form action = "<?= $_SERVER['PHP_SELF'] . '?controller=Usuario&action=checkCredentials' ?>" method = "post" class = "center_column form form--login">
+                <?php
+                if (isset($_GET['error'])) {
+                    echo "<p class=error>El usuario y/o la contraseñ no son válidos";
+                }
+                ?>
                 <input type = "text" name = "username" required class = "form__input--index" placeholder = "Type your username">
                 <input type = "password" name = "password" required class = "form__input--index" placeholder = "Type your password">
                 <div class = "center_row checkbox">
