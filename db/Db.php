@@ -1,6 +1,6 @@
 <?php
 
-class Database {
+class Db {
 
     private $host = 'localhost';
     private $db_name = 'booking';

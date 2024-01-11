@@ -1,7 +1,7 @@
 <?php
 
-require "./db/Database.php";
-require "objects/Habitacion.php";
+require_once "./db/Db.php";
+require_once "objects/Habitacion.php";
 
 class HabitacionModel {
 
@@ -9,7 +9,7 @@ class HabitacionModel {
     private $pdo;
 
     function __construct() {
-        $this->db = new Database();
+        $this->db = new Db();
         $this->pdo = $this->db->getConnection();
     }
 

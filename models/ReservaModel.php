@@ -1,6 +1,6 @@
 <?php
-require './db/Database.php';
-require 'objects/Reserva.php';
+require_once './db/Db.php';
+require_once 'objects/Reserva.php';
 
 class ReservaModel {
 
@@ -8,7 +8,7 @@ class ReservaModel {
     private $pdo;
 
     function __construct() {
-        $this->db = new Database();
+        $this->db = new Db();
         $this->pdo = $this->db->getConnection();
     }
     
