@@ -40,7 +40,7 @@ class UsuarioView {
                 </div>
             </div>
             <!--form to enter your data-->
-            <form action = "<?= $_SERVER['PHP_SELF'] . '?controller=Usuario&action=checkCredentials' ?>" method = "post" class = "center_column form form--login">
+            <form action = "<?= $_SERVER['PHP_SELF'] . '?controller=Usuario&action=logIn' ?>" method = "post" class = "center_column form form--login">
                 <?php
                 if (isset($_GET['error'])) {
                     echo "<p class=error>El usuario y/o la contraseñ no son válidos";
