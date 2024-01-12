@@ -26,7 +26,7 @@ class HotelView {
             <h2><?= $hotel->getNombre() ?></h2>
 
             <?php
-            $habitacionView->showHabitaciones($rooms);
+            $habitacionView->showHabitaciones(array($hotel,$rooms));
             ?>
         </div>
         <?php
