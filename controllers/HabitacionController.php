@@ -8,7 +8,10 @@ class HabitacionController{
         $this->habitacionModel = new HabitacionModel();
     }
     function listHabitaciones(){
-        $allRooms = $this->habitacionModel->getHabitaciones();
+        if($_POST['hotel_id']){
+            $hotel_id = htmlspecialchars($_POST['hotel_id']);
+        }
+        $allRooms = $this->habitacionModel->getHabitaciones($hotel_id);
         $this->habitacionView->showHabitaciones($allRooms);
     }
 }

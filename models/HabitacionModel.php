@@ -13,10 +13,10 @@ class HabitacionModel {
         $this->pdo = $this->db->getConnection();
     }
 
-    function getHabitaciones() {
-        $sql = "SELECT * FROM habitaciones;";
+    function getHabitaciones($hotel_id) {
+        $sql = "SELECT * FROM habitaciones where id_hotel = ?;";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
+        $stmt->execute(array($hotel_id));
         $stmt->setFetchMode(PDO::FETCH_CLASS, 'Habitacion');
         $allRooms = $stmt->fetchAll();
         return $allRooms;
