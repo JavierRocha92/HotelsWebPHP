@@ -1,9 +1,9 @@
 <?php
 
-include './controllers/HotelController.php';
-include './controllers/HabitacionController.php';
-include './controllers/ReservaController.php';
-include './controllers/UsuarioController.php';
+include_once './controllers/HotelController.php';
+include_once './controllers/HabitacionController.php';
+include_once './controllers/ReservaController.php';
+include_once './controllers/UsuarioController.php';
 
 // Define la acción por defecto
 define('DEFAULT_ACTION', 'getForm');

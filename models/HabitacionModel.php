@@ -19,6 +19,7 @@ class HabitacionModel {
         $stmt->execute(array($hotel_id));
         $stmt->setFetchMode(PDO::FETCH_CLASS, 'Habitacion');
         $allRooms = $stmt->fetchAll();
+        $this->db->disconnection();
         return $allRooms;
     }
 }

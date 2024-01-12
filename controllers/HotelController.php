@@ -1,7 +1,9 @@
 <?php
 
-require './views/HotelView.php';
-require './models/HotelModel.php';
+require_once './views/HotelView.php';
+require_once './models/HotelModel.php';
+require_once 'HabitacionController.php';
+
 
 class HotelController {
 
@@ -16,5 +18,17 @@ class HotelController {
 
         $allHotels = $this->hotelModel->getHotels();
         $this->hotelView->showHotels($allHotels);
+    }
+    
+    function displayExtendedHotelInfo(){
+        require_once './lib/files/sessionManagement.php';
+        require_once './lib/files/cookiesManagement.php';
+        if(isset($_POST['hotel_id'])){
+            $hotel_id = htmlspecialchars($_POST['hotel_id']);
+        }
+        $hotel = $this->hotelModel->getHotel($hotel_id);
+        $habitacionController = new HabitacionController(); 
+        $rooms = $habitacionController->listHabitaciones($hotel_id);
+        $this->hotelView->showEspecificHotel([$hotel,$rooms]);
     }
 }

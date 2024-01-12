@@ -1,18 +1,20 @@
 <?php
-require "./views/HabitacionView.php";
-require "./models/HabitacionModel.php";
 
-class HabitacionController{
-    function __construct(){
+require_once "./views/HabitacionView.php";
+require_once "./models/HabitacionModel.php";
+
+class HabitacionController {
+
+    function __construct() {
         $this->habitacionView = new HabitacionView();
         $this->habitacionModel = new HabitacionModel();
     }
-    function listHabitaciones(){
-        if($_POST['hotel_id']){
-            $hotel_id = htmlspecialchars($_POST['hotel_id']);
-        }
+
+    function listHabitaciones($hotel_id) {
+        require_once './lib/files/sessionManagement.php';
+        require_once './lib/files/cookiesManagement.php';
+
         $allRooms = $this->habitacionModel->getHabitaciones($hotel_id);
-        $this->habitacionView->showHabitaciones($allRooms);
+        return $allRooms;
     }
 }
-
