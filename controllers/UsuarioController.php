@@ -69,7 +69,7 @@ class UsuarioController {
      * @param Usuario $user especific Usuario object on session
      */
     public function createSessionCookie($user) {
-        setcookie(hash('sha256', $user->getId()), 'sessionCookie', time() + 6, '/');
+        setcookie(hash('sha256', $user->getId()), 'sessionCookie', time() + 600, '/');
     }
 
 //Funtions about handle wrong and succes login***************************************************************************************************

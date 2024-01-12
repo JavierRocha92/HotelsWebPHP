@@ -7,9 +7,25 @@ class Habitacion{
     private $precio;
     private $descripcion;
     
-    function __construct() {
-
+       public function __construct(
+        $id = false,
+        $id_hotel = false,
+        $num_habitacion = false,
+        $tipo = false,
+        $precio = false,
+        $descripcion = false
+    ) {
+        $this->id = $id;
+        $this->id_hotel = $id_hotel;
+        $this->num_habitacion = $num_habitacion;
+        $this->tipo = $tipo;
+        $this->precio = $precio;
+        $this->descripcion = $descripcion;
     }
+    
+//    function __construct() {
+//
+//    }
     
     public function __toString() {
         return "Habitación [ID: {$this->id}, ID Hotel: {$this->id_hotel}, Número: {$this->num_habitacion}, Tipo: {$this->tipo}, Precio: {$this->precio}, Descripción: {$this->descripcion}]";
