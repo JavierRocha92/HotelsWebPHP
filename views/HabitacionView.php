@@ -8,7 +8,7 @@ class HabitacionView {
         foreach ($allRooms as $room) {
             ?>
 
-            <form action="<?= $_SERVER['PHP_SELF'] . '?controller=Reserva&action=makeBooking' ?>" method="post">
+            <form action="<?= $_SERVER['PHP_SELF'] . '?controller=Reserva&action=confirmForm' ?>" method="post">
                 <label for="campo"><?= $room->getId() . ' ' . $room->getTipo() ?></label>
                 <input type="hidden" name="room_id" value="<?= $room->getId() ?>">
                 <input type="hidden" name="hotel_id" value="<?= $hotel_id ?>">

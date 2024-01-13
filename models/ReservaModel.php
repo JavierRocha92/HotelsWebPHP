@@ -13,10 +13,10 @@ class ReservaModel {
         $this->pdo = $this->db->getConnection();
     }
 
-    function getReservas() {
-        $sql = 'SELECT * FROM reservas';
+    function getReservas($user_id) {
+        $sql = 'SELECT * FROM reservas where id_usuario = ?';
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
+        $stmt->execute(array($user_id));
         $stmt->setFetchMode(PDO::FETCH_CLASS, 'Reserva');
         $allBookings = $stmt->fetchAll();
         return $allBookings;
