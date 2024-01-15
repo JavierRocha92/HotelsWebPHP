@@ -21,6 +21,20 @@ class UsuarioController {
     function getForm() {
         $this->usuarioView->showForm();
     }
+    /**
+     * Function to create a view and callign method showEmailForm()
+     */
+    function emailForm(){
+        $this->usuarioView->showEmailForm();
+    }
+    
+    function sendEmail(){
+        require_once './lib/files/send.php';
+    }
+    
+    function confirmationEmail(){
+        $this->usuarioView->showConfirmationEmail();
+    }
 
     /**
      * Funtion to porcess credential from a user are correct by calling other function and create session and cookies by calling other functions

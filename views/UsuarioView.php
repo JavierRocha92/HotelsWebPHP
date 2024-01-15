@@ -60,8 +60,38 @@ class UsuarioView {
                 <a class = "form__text" href = "./index.php?register" id = "signup__button">Sign up</a>
             </div>
         </div>
+        <?php
+    }
 
-        </div>
+    /**
+     * Funtion show a HTML form to send email for admin
+     */
+    function showEmailForm() {
+        ?>
+        <form class="form" action="<?= $_SERVER['PHP_SELF'] . '?controller=Usuario&action=sendEmail' ?>" method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" id="username" placeholder="Type your username">
+            </div>
+            <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" name="subject" class="form-control" id="subject" placeholder="Indicate a subject">
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label>
+                <textarea type="text" name="content" class="form-control" id="content" placeholder="Hi, my name is..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <?php
+    }
+
+    function showConfirmationEmail() {
+        ?>
+
+        <p>El correo se ha enviado con exito</p>
+        <a href="<?= $_SERVER['PHP_SELF'] . '?controller=Hotel&action=listHotels' ?>">Volver a hoteles</a>
         <?php
     }
 }
