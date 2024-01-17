@@ -25,10 +25,13 @@ class UsuarioController {
      * Function to create a view and callign method showEmailForm()
      */
     function emailForm(){
+        require_once './lib/files/sessionManagement.php';
+        require_once './lib/files/cookiesManagement.php';
         $this->usuarioView->showEmailForm();
     }
     
     function sendEmail(){
+        
         require_once './lib/files/send.php';
     }
     

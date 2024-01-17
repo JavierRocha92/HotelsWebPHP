@@ -5,3 +5,8 @@ html{
     scroll-behavior: smooth;
 }
 
+/*styles about cards*/
+.cards{
+    gap: 20px;
+}
+

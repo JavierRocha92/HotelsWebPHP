@@ -46,6 +46,12 @@ function loadController($controllerName) {
 
 // Carga el controlador y la acción correspondientes
 if (isset($_GET["controller"])) {
+    
+//    if($_GET['controller'] != 'Usuario' && $_GET['action'] != 'logIn'){
+//        require_once './lib/files/sessionManagement.php';
+//    require_once './lib/files/cookiesManagement.php';
+//    }
+    
     $controllerObj = loadController($_GET["controller"]);
     throwAction($controllerObj);
 } else {

@@ -1,5 +1,7 @@
 
-<?php ?>
+<?php
+
+?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -12,7 +14,7 @@
         <!-- OTHERS CSS -->
         <link rel="stylesheet" href="./css/all.css"> 
         <link rel="stylesheet" href="./css/normalize.css"> 
-        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="./css/styles.css">
         <link rel="stylesheet" href="./css/form.css">
 
         <!-- CSS MIN ONLINE SOURCE -->
@@ -26,7 +28,7 @@
 //PHP code to include header code
             include_once './templates/header.php';
             ?>
-            <main class="main">
+            <main class="main p-5">
                 <?php
                 include './frontController.php';
                 ?>

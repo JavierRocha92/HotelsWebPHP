@@ -24,7 +24,7 @@ class HabitacionView {
                             <label for="campo"></label>
                             <input type="hidden" name="room_id" value="<?= $room->getId() ?>">
                             <input type="hidden" name="hotel_id" value="<?= $hotel->getId() ?>">
-                            <button class="btn bg-primary" type="submit">Reservar</button>
+                            <button class="btn bg-primary text-light" type="submit">Reservar</button>
                         </form>
                         <!--final form hotel-->
                     </div>

@@ -14,13 +14,12 @@ class HotelView {
                 <div class="card" style="width: 18rem;">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
+                        <h5 class="card-title"><?= $hotel->getNombre() ?></h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         <!--form for any hotel-->
-                        <form action="<?= $_SERVER['PHP_SELF'] . '?controller=Hotel&action=displayExtendedHotelInfo' ?>" method="post">
-                            <label for="nombre"><?= $hotel->getNombre() ?>:</label>
+                        <form class="" action="<?= $_SERVER['PHP_SELF'] . '?controller=Hotel&action=displayExtendedHotelInfo' ?>" method="post">
                             <input type="hidden" name="hotel_id" value="<?= $hotel->getId() ?>">
-                            <button class="btn bg-primary" type="submit">Enviar</button>
+                            <button class="btn bg-primary text-light" type="submit">Show Rooms</button>
                         </form>
                         <!--final form hotel-->
                     </div>

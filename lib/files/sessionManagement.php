@@ -8,5 +8,5 @@ $user = unserialize($user);
 if($user == null){
     echo 'estro porque el usuario no existe';
     //Redirect and show form again to user to login 
-    header('Location: '.$_SERVER['PHP_SELF'].'?controller=Usuario&action=showForm');
+    header('Location: '.$_SERVER['PHP_SELF']);
 }

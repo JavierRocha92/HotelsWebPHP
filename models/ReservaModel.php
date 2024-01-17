@@ -31,11 +31,51 @@ class ReservaModel {
         try {
             $sql = 'INSERT INTO Reservas (id_usuario, id_hotel, id_habitacion,fecha_entrada, fecha_salida) VALUES (?, ?, ?, ? ,?)';
             $stmt = $this->pdo->prepare($sql);
-            $stmt->execute(array($user->getId(),$hotel_id,$room_id, $initDate, $finalDate));
+            $stmt->execute(array($user->getId(), $hotel_id, $room_id, $initDate, $finalDate));
             $booking_id = $this->pdo->lastInsertId();
             return $booking_id;
         } catch (Exception $ex) {
             return false;
         }
+    }
+
+    function deleteBooking($booking_id) {
+        try {
+            $sql = "DELETE FROM reservas WHERE id = ?";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute(array($booking_id));
+            return true;
+        } catch (Exception $exc) {
+            echo 'La aplicación se encuntra en labores de mantenimiento, sentimos las molestias.';
+        }
+    }
+
+    function updateBooking($values) {
+        //format date to mysql
+        $fecha_entrada = date("Y-m-d", strtotime($values['fecha_entrada']));
+        $fecha_salida = date("Y-m-d", strtotime($values['fecha_salida']));
+//        echo $fecha_entrada;
+//        echo '<br>'; 
+//        echo $fecha_salida;
+//        exit;
+        try {
+            $sql = "UPDATE reservas SET id_habitacion = ?, fecha_entrada = ?,"
+                    . "fecha_salida = ? WHERE id = ?";
+            $stmt = $this->pdo->prepare($sql);
+//            echo $stmt;
+            $stmt->execute(
+                    array($values['room_id'],
+                        $fecha_entrada,
+                        $fecha_salida,
+                        $values['booking_id'])
+            );
+            return true;
+        } catch (Exception $exc) {
+            echo 'La aplicación esta en labores de mantenimiento.';
+        }
+        
+        //HAY QUE MIRAR POQUE NO ACTUALIZA BIEN DEL TODO POR EJEMPLO
+        //E TIPO DE HABITACION
+        
     }
 }

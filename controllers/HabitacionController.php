@@ -11,8 +11,6 @@ class HabitacionController {
     }
 
     function listHabitaciones($hotel_id) {
-        require_once './lib/files/sessionManagement.php';
-        require_once './lib/files/cookiesManagement.php';
 
         $allRooms = $this->habitacionModel->getHabitaciones($hotel_id);
         return $allRooms;

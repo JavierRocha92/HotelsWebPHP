@@ -88,8 +88,7 @@ class UsuarioView {
     }
 
     function showConfirmationEmail() {
-        ?>
-
+        ?> 
         <p>El correo se ha enviado con exito</p>
         <a href="<?= $_SERVER['PHP_SELF'] . '?controller=Hotel&action=listHotels' ?>">Volver a hoteles</a>
         <?php
