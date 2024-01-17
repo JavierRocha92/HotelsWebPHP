@@ -19,27 +19,39 @@ class ReservaController {
     }
 
     function confirmForm() {
-        $this->reservaView->showConfirmationForm();
+        $postValues = filter_input_array(INPUT_POST, $_POST);
+        switch ($postValues['option']) {
+            case 'delete':
+                $this->reservaView->showConfirmationDeleteForm($postValues);
+                break;
+            case 'update':
+                $this->reservaView->showConfirmationUpdateForm($postValues);
+                break;
+            case 'insert':
+                $this->reservaView->showConfirmationInsertForm($postValues);
+                break;
+        }
     }
 
-    function reservaConfirmForm() {
-        $booking = isset($_POST['booking']) ? unserialize(base64_decode($_POST['booking'])) : null;
-        $this->reservaView->showReservaConfirmationForm($booking);
+    function insertForm() {
+        $postValues = filter_input_array(INPUT_POST, $_POST);
+        $this->reservaView->showInsertForm($postValues);
     }
 
     function modifyForm() {
         $booking = isset($_POST['booking']) ? unserialize(base64_decode($_POST['booking'])) : null;
         $habitacionController = new HabitacionController();
         $rooms = $habitacionController->listHabitaciones($booking->getId_hotel());
-        $this->reservaView->showReservaUpdatingForm($booking, $rooms);
+        $this->reservaView->showUpdatingForm($booking, $rooms);
     }
 
-    function makeBooking($room_id, $hotel_id, $user) {
+    function makeBooking($postValues, $user) {
+        $values = unserialize(base64_decode($postValues['values']));
         require_once './lib/files/sessionManagement.php';
         require_once './lib/files/cookiesManagement.php';
 
-        if (isset($room_id) && isset($user)) {
-            $result = $this->reservaModel->insertReserva(array($user, $room_id, $hotel_id));
+        if (isset($values) && isset($user)) {
+            $result = $this->reservaModel->insertReserva($user, $values);
             $this->reservaView->showMessage('insert', $result);
         }
     }
@@ -47,12 +59,14 @@ class ReservaController {
     function deleteBooking($booking_id) {
         if (isset($booking_id)) {
             $result = $this->reservaModel->deleteBooking($booking_id);
-            if ($result)
+            if ($result) {
                 $this->reservaView->showMessage('delete', $result);
+            }
         }
     }
 
-    function updateBooking($values) {
+    function updateBooking($postValues) {
+        $values = unserialize(base64_decode($postValues['values']));
         if (isset($values)) {
             $result = $this->reservaModel->updateBooking($values);
             if ($result) {
@@ -87,7 +101,7 @@ class ReservaController {
                         $this->deleteBooking($postValues['booking_id']);
                         break;
                     case 'insert':
-                        $this->makeBooking($postValues['room_id'], $postValues['hotel_id'], $user);
+                        $this->makeBooking($postValues, $user);
                         break;
                     case 'update':
                         $this->updateBooking($postValues);
