@@ -41,7 +41,7 @@ class ReservaController {
     }
 
     function modifyForm() {
-        
+
         $booking = isset($_POST['booking']) ? unserialize(base64_decode($_POST['booking'])) : null;
         print_r($booking);
         exit;
@@ -51,7 +51,7 @@ class ReservaController {
         $this->reservaView->showUpdatingForm($booking, $rooms);
     }
 
-    function makeBooking($user, $postValues) {
+    function insertBooking($user, $postValues) {
         $values = unserialize(base64_decode($postValues['values']));
 
         if (isset($values) && isset($user)) {
@@ -59,7 +59,8 @@ class ReservaController {
             if ($result) {
                 $this->listReservas($user, array(
                     'option' => 'insert',
-                    'result' => $result));
+                    'result' => $result,)
+                );
             }
         }
     }
@@ -100,7 +101,7 @@ class ReservaController {
     }
 
     function handleUserResponse() {
-        
+
         require_once './lib/files/sessionManagement.php';
         require_once './lib/files/cookiesManagement.php';
         $room_id = isset($_POST['room_id']) ? htmlspecialchars($_POST['room_id']) : null;
@@ -114,7 +115,7 @@ class ReservaController {
                         $this->deleteBooking($user, $postValues['booking_id']);
                         break;
                     case 'insert':
-                        $this->makeBooking($user, $postValues);
+                        $this->insertBooking($user, $postValues);
                         break;
                     case 'update':
                         $this->updateBooking($user, $postValues);

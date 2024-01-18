@@ -2,12 +2,10 @@
 
 class HabitacionView {
 
-    function showHabitaciones($data) {
-        $hotel = $data[0];
-        $allRooms = $data[1];
+    function showHabitaciones($hotel_name, $hotel_id, $allRooms) {
         ?>
         <!--hotel title-->
-        <h2 class="title">Estas son las habitaciones del Hotel <?= $hotel->getNombre() ?></h2>
+        <h2 class="title">Estas son las habitaciones del Hotel <?= $hotel_name ?></h2>
         <!--container habitaciones cards-->
         <div class="cards d-flex">
             <?php
@@ -15,15 +13,18 @@ class HabitacionView {
                 ?>
 
                 <div class="card" style="width: 18rem;">
-                    <img src="<?= $room->getFoto() ?>" class="card-img-top" alt="...">
+                    <img src="data:image/png;base64, <?= base64_encode($room->getFoto()) ?>" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title"><?=$room->getTipo() ?></h5>
+                        <h5 class="card-title"><?= $room->getTipo() ?></h5>
                         <p class="card-text"><?= $room->getDescripcion() ?></p>
                         <!--form for any hotel-->
                         <form action="<?= $_SERVER['PHP_SELF'] . '?controller=Reserva&action=insertForm' ?>" method="post">
-                            <label for="campo"></label>
                             <input type="hidden" name="room_id" value="<?= $room->getId() ?>">
-                            <input type="hidden" name="hotel_id" value="<?= $hotel->getId() ?>">
+                            <input type="hidden" name="room_type" value="<?= $room->getTipo() ?>">
+
+                            <input type="hidden" name="hotel_id" value="<?= $hotel_id ?>">
+                            <input type="hidden" name="hotel_name" value="<?= $hotel_name ?>">
+
                             <button class="btn bg-primary text-light" type="submit">Reservar</button>
                         </form>
                         <!--final form hotel-->

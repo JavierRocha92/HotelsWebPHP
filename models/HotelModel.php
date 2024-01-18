@@ -15,6 +15,14 @@ class HotelModel {
 
     function getHotels() {
         try {
+            
+//            $image = file_get_contents('./assets/images/habitacion_id_3.jpg');
+//            echo $image;
+//            exit;
+//            $stmt = $this->pdo->prepare('UPDATE habitaciones SET foto = ? WHERE id = 3');
+//            $stmt->bindParam(1, $image, PDO::PARAM_LOB);
+//            $stmt->execute();
+            
             $sql = "SELECT * FROM hoteles";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
@@ -23,7 +31,7 @@ class HotelModel {
             $this->db->disconnection();
             return $allHotels;
         } catch (Exception $exc) {
-            echo 'se ha producido un error';
+            echo $exc;
         }
     }
 

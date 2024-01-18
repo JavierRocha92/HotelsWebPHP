@@ -12,14 +12,15 @@ class HotelView {
             foreach ($allHotels as $hotel) {
                 ?>
                 <div class="card" style="width: 18rem;">
-                    <img src="<?= $hotel->getFoto() ?>" class="card-img-top" alt="...">
+                    <img src="data:image/png;base64, <?= base64_encode($hotel->getFoto()) ?>" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title"><?= $hotel->getNombre() ?></h5>
                         <h6>Habitaciones: <?= $hotel->getNum_habitaciones() ?></h6>
                         <p class="card-text"><?= $hotel->getDescripcion() ?>.</p>
                         <!--form for any hotel-->
-                        <form class="" action="<?= $_SERVER['PHP_SELF'] . '?controller=Hotel&action=displayExtendedHotelInfo' ?>" method="post">
+                        <form class="" action="<?= $_SERVER['PHP_SELF'] . '?controller=Habitacion&action=listHabitacionesByHotel' ?>" method="post">
                             <input type="hidden" name="hotel_id" value="<?= $hotel->getId() ?>">
+                            <input type="hidden" name="hotel_name" value="<?= $hotel->getNombre() ?>">
                             <button class="btn bg-primary text-light" type="submit">Show Rooms</button>
                         </form>
                         <!--final form hotel-->

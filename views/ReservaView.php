@@ -17,7 +17,7 @@ class ReservaView {
                 ?>
                 <!--reservas card-->
                 <div class="card border" style="width: 18rem;">
-                    <img src="<?= $rooms[$count]->getFoto() ?>" class="card-img-top" alt="...">
+                    <img src="data:image/png;base64,<?= base64_encode($rooms[$count]->getFoto()) ?>" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Habitacion: <?= $rooms[$count]->getTipo() ?></h5>
                         <p class="card-text"><?= $rooms[$count]->getDescripcion() ?></p>
@@ -90,8 +90,8 @@ class ReservaView {
         <table border="1">
             <thead>
                 <tr>
-                    <th>Id Hotel</th>
-                    <th>Id Habitación</th>
+                    <th>Hotel</th>
+                    <th>Habitación</th>
                     <th>Check in</th>
                     <th>Check out</th>
                 </tr>
@@ -99,10 +99,14 @@ class ReservaView {
             <tbody>
                 <tr>
             <form action="<?= $_SERVER['PHP_SELF'] . '?controller=Reserva&action=confirmForm' ?>" method="post">
-                <td><input type="text" name="hotel_id" value="<?= $postValues['hotel_id'] ?>"></td>
-                <td><input type="text" name="room_id" value="<?= $postValues['room_id'] ?>"></td>
+                <td><input disabled type="text" value="<?= $postValues['hotel_name'] ?>"></td>
+                <td><input disabled type="text" value="<?= $postValues['room_type'] ?>"></td>
                 <td><input type="date" name="fecha_entrada"></td>
                 <td><input type="date" name="fecha_salida"></td>
+                <td><input type="hidden" name="hotel_id" value="<?= $postValues['hotel_id'] ?>"></td>
+                <td><input type="hidden" name="room_id" value="<?= $postValues['room_id'] ?>"></td>
+                <td><input type="hidden" name="hotel_name" value="<?= $postValues['hotel_name'] ?>"></td>
+                <td><input type="hidden" name="room_type" value="<?= $postValues['room_type'] ?>"></td>
                 <td><button class="btn bg-primary text-light" name="option" value="insert">Reservar</button></td>
             </form>
 
