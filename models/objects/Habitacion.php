@@ -6,6 +6,7 @@ class Habitacion{
     private $tipo;
     private $precio;
     private $descripcion;
+    private $foto;
     
 //       public function __construct(
 //        $id = false,
@@ -77,5 +78,15 @@ class Habitacion{
     public function setDescripcion($descripcion): void {
         $this->descripcion = $descripcion;
     }
+    
+    public function getFoto() {
+        return $this->foto;
+    }
+
+    public function setFoto($foto): void {
+        $this->foto = $foto;
+    }
+
+
     
 }

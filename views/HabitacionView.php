@@ -15,10 +15,10 @@ class HabitacionView {
                 ?>
 
                 <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="<?= $room->getFoto() ?>" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title"><?= $room->getId() . ' ' . $room->getTipo() ?></h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 class="card-title"><?=$room->getTipo() ?></h5>
+                        <p class="card-text"><?= $room->getDescripcion() ?></p>
                         <!--form for any hotel-->
                         <form action="<?= $_SERVER['PHP_SELF'] . '?controller=Reserva&action=insertForm' ?>" method="post">
                             <label for="campo"></label>

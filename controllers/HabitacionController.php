@@ -15,4 +15,7 @@ class HabitacionController {
         $allRooms = $this->habitacionModel->getHabitaciones($hotel_id);
         return $allRooms;
     }
+    function getHabitacionesByBooking($bookings){
+        return $this->habitacionModel->getHabitacionesByBooking($bookings);
+    }
 }

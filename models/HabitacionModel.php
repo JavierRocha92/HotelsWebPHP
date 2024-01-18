@@ -22,4 +22,16 @@ class HabitacionModel {
         $this->db->disconnection();
         return $allRooms;
     }
+
+    function getHabitacionesByBooking($allBookings) {
+        $rooms = array();
+        foreach ($allBookings as $booking) {
+            $sql = "SELECT * FROM habitaciones WHERE ID = ?";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute(array($booking->getId_habitacion()));
+            $stmt->setFetchMode(PDO::FETCH_CLASS,'Habitacion');
+            array_push($rooms, $stmt->fetch());
+        }
+        return $rooms;
+    }
 }

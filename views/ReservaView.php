@@ -2,7 +2,12 @@
 
 class ReservaView {
 
-    function showReservas($allBookings, $user) {
+    function showReservas($allBookings, $rooms, $user, $alert) {
+        //Declare counter to get all rooms from $rooms array
+        $count = 0;
+        if($alert){
+            $this->showMessage($alert);
+        }
         ?>
         <h2>Estas son tus reservas, <?= $user->getNombre() ?> </h2>
         <!--container reservas cards-->
@@ -12,10 +17,10 @@ class ReservaView {
                 ?>
                 <!--reservas card-->
                 <div class="card border" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="<?= $rooms[$count]->getFoto() ?>" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Id de la reserva: <?= $booking->getId() ?></h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 class="card-title">Habitacion: <?= $rooms[$count]->getTipo() ?></h5>
+                        <p class="card-text"><?= $rooms[$count]->getDescripcion() ?></p>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Check in :<?= $booking->getFecha_Entrada() ?></li>
@@ -37,6 +42,8 @@ class ReservaView {
                 </div>
 
                 <?php
+                //Increment count variable
+                $count++;
             }
             ?>
 
@@ -45,25 +52,37 @@ class ReservaView {
         <?php
     }
 
-    function showMessage($option, $result) {
+    function showMessage($alert) {
+        $option = $alert['option'];
+        $result = $alert['result'];
+        $message;
         if ($result) {
             switch ($option) {
                 case 'delete':
-                    echo "Tu reserva, numero $result se ha eliminado con exito";
+                    $message = "Tu reserva, numero $result se ha eliminado con exito";
                     break;
                 case 'update':
-                    echo "La reserva se ha modificado con exito";
+                    $message = "La reserva se ha modificado con exito";
                     break;
                 case 'insert':
-                    echo "Tu reserva con Numero: $result , se ha realizado con exito";
+                    $message = "Tu reserva con Numero: $result , se ha realizado con exito";
                     break;
             }
+            ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong><?= $message ?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
         } else {
-            echo 'Parece que algo salio mal, intentelo de nuevo';
+            ?>
+            }
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong><?= 'Parece que algo salio mal, intentelo de nuevo' ?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
         }
-        ?>
-        <a href="<?= $_SERVER['PHP_SELF'] . '?controller=Hotel&action=listHotels' ?>">Go to Hotels</a>
-        <?php
     }
 
     function showInsertForm($postValues) {
@@ -122,8 +141,8 @@ class ReservaView {
         </div>
         <form action="<?= $_SERVER['PHP_SELF'] . '?controller=Reserva&action=handleUserResponse' ?>" method="post">
             <input type="hidden" name="values" value="<?= base64_encode(serialize($values)) ?>">
-            <button name="response" value="yes"> Modificar </button>
-            <button name="response" value="no"> Volver </button>
+            <button class="btn bg-primary text-light" name="response" value="yes"> Modificar </button>
+            <button class="btn bg-primary text-light" name="response" value="no"> Volver </button>
             <input type="hidden" name="option" value="update">
         </form>
         <?php
@@ -147,14 +166,16 @@ class ReservaView {
     }
 
     function showUpdatingForm($booking, $rooms) {
+        //TENEMOS QUE HACER UNA CONSULTA PARA MOSTAR EL NOMBRE DE LA HABITACION Y DEL HOTEL DE LA RESERVA PARA MOSTARSELO A UL USUAIRO,
+        //LO MISMO HAY QUE HACER EN LSO DEMAS METODOS PARA BORRAR UNA RESERVA O PARA INSERTARLA
         ?>
         <h2>Indica los cambios que quieres realizar en tu reserva</h2>
         <table>
             <tr>
                 <th>Id</th>
+                <th>Habitaciones</th>
                 <th>Check in</th>
                 <th>Check out</th>
-                <th>Habitaciones</th>
             </tr>
             <tr>
             <form action="<?= $_SERVER['PHP_SELF'] . '?controller=Reserva&action=confirmForm' ?>" method="post">
@@ -179,10 +200,10 @@ class ReservaView {
                     <input type="date" name="fecha_salida" value="<?= $booking->getFecha_salida() ?>">
                 </td>
                 <td>
-                    <button name="response" value="yes"> Modificar </button>
+                    <button class="btn bg-primary text-light" name="response" value="yes"> Modificar </button>
                 </td>
                 <td>
-                    <button name="response" value="no"> Volver </button>
+                    <button class="btn bg-primary text-light" name="response" value="no"> Volver </button>
                 </td>
                 <input type="hidden" name="booking_id" value="<?= $booking->getId() ?>">
                 <input type="hidden" name="option" value="update">

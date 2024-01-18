@@ -11,11 +11,13 @@ class ReservaController {
         $this->reservaModel = new ReservaModel();
     }
 
-    function listReservas() {
+    function listReservas($user = false, $alert = false) {
         require_once './lib/files/sessionManagement.php';
         require_once './lib/files/cookiesManagement.php';
         $allBookings = $this->reservaModel->getReservas($user->getId());
-        $this->reservaView->showReservas($allBookings, $user);
+        $habitacionController = new HabitacionController();
+        $rooms = $habitacionController->getHabitacionesByBooking($allBookings);
+        $this->reservaView->showReservas($allBookings, $rooms, $user, $alert);
     }
 
     function confirmForm() {
@@ -39,38 +41,48 @@ class ReservaController {
     }
 
     function modifyForm() {
+        
         $booking = isset($_POST['booking']) ? unserialize(base64_decode($_POST['booking'])) : null;
+        print_r($booking);
+        exit;
         $habitacionController = new HabitacionController();
         $rooms = $habitacionController->listHabitaciones($booking->getId_hotel());
+        //hay que meter un objeto para hacer sonsulta sobre hoteles
         $this->reservaView->showUpdatingForm($booking, $rooms);
     }
 
-    function makeBooking($postValues, $user) {
+    function makeBooking($user, $postValues) {
         $values = unserialize(base64_decode($postValues['values']));
-        require_once './lib/files/sessionManagement.php';
-        require_once './lib/files/cookiesManagement.php';
 
         if (isset($values) && isset($user)) {
             $result = $this->reservaModel->insertReserva($user, $values);
-            $this->reservaView->showMessage('insert', $result);
-        }
-    }
-
-    function deleteBooking($booking_id) {
-        if (isset($booking_id)) {
-            $result = $this->reservaModel->deleteBooking($booking_id);
             if ($result) {
-                $this->reservaView->showMessage('delete', $result);
+                $this->listReservas($user, array(
+                    'option' => 'insert',
+                    'result' => $result));
             }
         }
     }
 
-    function updateBooking($postValues) {
+    function deleteBooking($user, $booking_id) {
+        if (isset($booking_id)) {
+            $result = $this->reservaModel->deleteBooking($booking_id);
+            if ($result) {
+                $this->listReservas($user, array(
+                    'option' => 'delete',
+                    'result' => $result));
+            }
+        }
+    }
+
+    function updateBooking($user, $postValues) {
         $values = unserialize(base64_decode($postValues['values']));
         if (isset($values)) {
             $result = $this->reservaModel->updateBooking($values);
             if ($result) {
-                $this->reservaView->showMessage('update', $result);
+                $this->listReservas($user, array(
+                    'option' => 'update',
+                    'result' => $result));
             }
         }
     }
@@ -88,6 +100,7 @@ class ReservaController {
     }
 
     function handleUserResponse() {
+        
         require_once './lib/files/sessionManagement.php';
         require_once './lib/files/cookiesManagement.php';
         $room_id = isset($_POST['room_id']) ? htmlspecialchars($_POST['room_id']) : null;
@@ -98,13 +111,13 @@ class ReservaController {
             if ($postValues['response'] == 'yes') {//Conditinal to check if $Booking_id exist to delete a booking
                 switch ($postValues['option']) {
                     case 'delete':
-                        $this->deleteBooking($postValues['booking_id']);
+                        $this->deleteBooking($user, $postValues['booking_id']);
                         break;
                     case 'insert':
-                        $this->makeBooking($postValues, $user);
+                        $this->makeBooking($user, $postValues);
                         break;
                     case 'update':
-                        $this->updateBooking($postValues);
+                        $this->updateBooking($user, $postValues);
                         break;
                 }
 
