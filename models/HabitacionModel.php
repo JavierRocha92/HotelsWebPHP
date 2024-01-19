@@ -29,9 +29,10 @@ class HabitacionModel {
             $sql = "SELECT * FROM habitaciones WHERE ID = ?";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute(array($booking->getId_habitacion()));
-            $stmt->setFetchMode(PDO::FETCH_CLASS,'Habitacion');
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Habitacion');
             array_push($rooms, $stmt->fetch());
         }
+        $this->db->disconnection();
         return $rooms;
     }
 }

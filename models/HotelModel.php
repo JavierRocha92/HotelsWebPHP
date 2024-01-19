@@ -31,7 +31,7 @@ class HotelModel {
             $this->db->disconnection();
             return $allHotels;
         } catch (Exception $exc) {
-            echo $exc;
+            return false;
         }
     }
 

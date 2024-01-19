@@ -20,8 +20,6 @@ class HabitacionController {
     }
 
     function listHabitacionesByHotel() {
-        require_once './lib/files/sessionManagement.php';
-        require_once './lib/files/cookiesManagement.php';
         $hotel_id = isset($_POST['hotel_id']) ? htmlspecialchars(($_POST['hotel_id'])) : null;
         $hotel_name = isset($_POST['hotel_name']) ? htmlspecialchars(($_POST['hotel_name'])) : null;
         $rooms = $this->habitacionModel->getHabitaciones($hotel_id);

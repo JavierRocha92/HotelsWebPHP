@@ -2,7 +2,8 @@
 
 class ReservaView {
 
-    function showReservas($allBookings, $rooms, $user, $alert) {
+    function showReservas($allBookings, $rooms, $alert) {
+        global $user;
         //Declare counter to get all rooms from $rooms array
         $count = 0;
         if($alert){

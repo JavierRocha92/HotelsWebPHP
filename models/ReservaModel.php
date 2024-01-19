@@ -22,8 +22,8 @@ class ReservaModel {
         return $allBookings;
     }
 
-    function insertReserva($user, $postValues) {
-
+    function insertReserva($postValues) {
+        global $user;
         $initDate = date("Y-m-d", strtotime($postValues['fecha_entrada']));
         $finalDate = date("Y-m-d", strtotime($postValues['fecha_salida']));
         try {

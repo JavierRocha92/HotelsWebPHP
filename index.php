@@ -1,5 +1,7 @@
 
 <?php
+require_once './lib/files/sessionManagement.php';
+require_once './lib/files/cookiesManagement.php';
 ?>
 <!doctype html>
 <html lang="en">
