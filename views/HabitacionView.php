@@ -5,9 +5,10 @@ class HabitacionView {
     function showHabitaciones($hotel_name, $hotel_id, $allRooms) {
         ?>
         <!--hotel title-->
-        <h2 class="title">Estas son las habitaciones del Hotel <?= $hotel_name ?></h2>
+        <h2 class="cards__title">Estas son las habitaciones del Hotel <?= $hotel_name ?></h2>
         <!--container habitaciones cards-->
         <div class="cards d-flex">
+
             <?php
             foreach ($allRooms as $room) {
                 ?>

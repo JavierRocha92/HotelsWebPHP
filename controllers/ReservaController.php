@@ -3,12 +3,15 @@
 require_once './views/ReservaView.php';
 require_once './models/ReservaModel.php';
 require_once 'habitacionController.php';
+require_once './logs/models/LogUserAction.php';
 
 class ReservaController {
 
     function __construct() {
         $this->reservaView = new ReservaView();
         $this->reservaModel = new ReservaModel();
+        $username = isset($user) ? $user->getNombre() : null;
+        $this->log = new LogUserAction($username);
     }
 
     function listReservas($alert = false) {
@@ -16,7 +19,12 @@ class ReservaController {
         $allBookings = $this->reservaModel->getReservas($user->getId());
         $habitacionController = new HabitacionController();
         $rooms = $habitacionController->getHabitacionesByBooking($allBookings);
-        $this->reservaView->showReservas($allBookings, $rooms, $alert);
+        if ($rooms) {
+            $this->log->loadUserAction('SELECT', 'YES');
+            $this->reservaView->showReservas($allBookings, $rooms, $alert);
+        } else {
+            $this->log->loadUserAction('SELECT', 'NO');
+        }
     }
 
     function confirmForm() {
@@ -43,8 +51,13 @@ class ReservaController {
         $booking = isset($_POST['booking']) ? unserialize(base64_decode($_POST['booking'])) : null;
         $habitacionController = new HabitacionController();
         $rooms = $habitacionController->listHabitaciones($booking->getId_hotel());
+        if ($rooms) {
+            $this->log->loadUserAction('SELECT', 'YES');
+            $this->reservaView->showUpdatingForm($booking, $rooms);
+        } else {
+            $this->log->loadUserAction('SELECT', 'NO');
+        }
         //hay que meter un objeto para hacer sonsulta sobre hoteles
-        $this->reservaView->showUpdatingForm($booking, $rooms);
     }
 
     function insertBooking($postValues) {
@@ -53,10 +66,13 @@ class ReservaController {
         if (isset($values) && isset($user)) {
             $result = $this->reservaModel->insertReserva($values);
             if ($result) {
+                $this->log->loadUserAction('INSERT', 'YES');
                 $this->listReservas(array(
                     'option' => 'insert',
                     'result' => $result,)
                 );
+            } else {
+                $this->log->loadUserAction('INSERT', 'NO');
             }
         }
     }
@@ -65,9 +81,13 @@ class ReservaController {
         if (isset($booking_id)) {
             $result = $this->reservaModel->deleteBooking($booking_id);
             if ($result) {
+                $this->log->loadUserAction('DELETE', 'YES');
                 $this->listReservas(array(
                     'option' => 'delete',
-                    'result' => $result));
+                    'result' => $result,)
+                );
+            } else {
+                $this->log->loadUserAction('DELETE', 'NO');
             }
         }
     }
@@ -77,24 +97,28 @@ class ReservaController {
         if (isset($values)) {
             $result = $this->reservaModel->updateBooking($values);
             if ($result) {
+                $this->log->loadUserAction('UPDATE', 'YES');
                 $this->listReservas(array(
                     'option' => 'update',
-                    'result' => $result));
+                    'result' => $result,)
+                );
+            } else {
+                $this->log->loadUserAction('UPDATE', 'NO');
             }
         }
     }
 
-    function handleReserva() {
-        if (isset($_POST['option'])) {
-            $option = htmlspecialchars($_POST['option']);
-            if ($option == 'delete') {
-                $this->reservaModel->deleteReserva($reserva_id);
-            }
-            if ($option == 'update') {
-                //Logica para la modificacion de una reserva
-            }
-        }
-    }
+//    function handleReserva() {
+//        if (isset($_POST['option'])) {
+//            $option = htmlspecialchars($_POST['option']);
+//            if ($option == 'delete') {
+//                $this->reservaModel->deleteReserva($reserva_id);
+//            }
+//            if ($option == 'update') {
+//                //Logica para la modificacion de una reserva
+//            }
+//        }
+//    }
 
     function handleUserResponse() {
         global $user;

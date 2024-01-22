@@ -7,6 +7,17 @@ html{
 
 /*styles about cards*/
 .cards{
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 300px;
     gap: 20px;
+}
+.cards__title{
+    margin: 10px;
+    margin-bottom: 30px;
+}
+/*Header styles*/
+.header__user{
+    width: 150px
 }
 

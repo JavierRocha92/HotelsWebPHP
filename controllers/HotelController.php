@@ -16,8 +16,6 @@ class HotelController {
     }
 
     function listHotels() {
-        require_once './lib/files/sessionManagement.php';
-        require_once './lib/files/cookiesManagement.php';
         $allHotels = $this->hotelModel->getHotels();
         if ($allHotels) {
             $this->hotelView->showHotels($allHotels);
@@ -26,5 +24,4 @@ class HotelController {
             $this->log->loadUserAction('SELECT', 'NO');
         }
     }
-
 }

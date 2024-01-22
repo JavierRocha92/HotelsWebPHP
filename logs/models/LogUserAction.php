@@ -44,7 +44,7 @@ class LogUserAction {
         //Create date
         $date = date('Y-m-d h:i:s');
         //Process content value
-        $content = "\n$this->username;$action,$date,$success";
+        $content = "\n$this->username;$action;$date;$success";
 
         $this->writeFile($content, 'a');
     }

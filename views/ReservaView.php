@@ -6,13 +6,13 @@ class ReservaView {
         global $user;
         //Declare counter to get all rooms from $rooms array
         $count = 0;
-        if($alert){
+        if ($alert) {
             $this->showMessage($alert);
         }
         ?>
-        <h2>Estas son tus reservas, <?= $user->getNombre() ?> </h2>
+        <h2 class="cards__title">Estas son tus reservas, <?= $user->getNombre() ?> </h2>
         <!--container reservas cards-->
-        <div class="cards d-flex justify-content-around w-100 border">
+        <div class="cards d-flex justify-content-around w-100">
             <?php
             foreach ($allBookings as $booking) {
                 ?>
@@ -79,7 +79,7 @@ class ReservaView {
             ?>
             }
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong><?= 'Parece que algo salio mal, intentelo de nuevo' ?></strong>
+                <strong><?= 'Vaya, parece que algo salió mal, intentelo de nuevo' ?></strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <?php

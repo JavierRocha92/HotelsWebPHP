@@ -5,9 +5,10 @@ class HotelView {
 
     function showHotels($allHotels) {
         ?>
-        <h2 class="title">Elige el hotel que mas te guste</h2>
+        <h2 class="cards__title">Elige el hotel que mas te guste</h2>
         <!--container cards hotels-->
         <div class="cards d-flex">
+
             <?php
             foreach ($allHotels as $hotel) {
                 ?>

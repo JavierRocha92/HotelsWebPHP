@@ -8,6 +8,7 @@ use PHPMailer\PHPMailer\Exception;
 require './lib/files/phpmailer/src/Exception.php';
 require './lib/files/phpmailer/src/PHPMailer.php';
 require './lib/files/phpmailer/src/SMTP.php';
+require '../config/config.php';
 
 //Conditonal to check if POST['send'] exists
 
@@ -21,21 +22,21 @@ if (isset($_POST['username']) && isset($_POST['subject']) && isset($_POST['conte
     //Get protocol
     $email->isSMTP();
     //Get gmail host for this case
-    $email->Host = 'smtp.gmail.com';
+    $email->Host =  $phpmailler_parameters['host'];
     //Tell something
     $email->SMTPAuth = true;
     //Origin mail email
-    $email->Username = 'j1992prueba1992@gmail.com';
+    $email->Username = $phpmailler_parameters['username'];
     //Password applicacion
-    $email->Password = 'divhxvdleamcmplm';
+    $email->Password = $phpmailler_parameters['password'];
     //Get secure protocol
-    $email->SMTPSecure = 'ssl';
+    $email->SMTPSecure = $phpmailler_parameters['smtpsecure'];
     //Inidicate smtp standard port
-    $email->Port = 465;
+    $email->Port = $phpmailler_parameters['port'];
     //Origin mail email
-    $email->setFrom('j1992prueba1992@gmail.com');
+    $email->setFrom($phpmailler_parameters['setfrom']);
     //Destiny email send
-    $email->addAddress('javierrg1992@gmail.com');//Debes escribir aqui un email para recibir los correos de los usuarios
+    $email->addAddress($phpmailler_parameters['addaddress']);//Debes escribir aqui un email para recibir los correos de los usuarios
     //Content type
     $email->isHTML(true);
     //set email subject

@@ -21,21 +21,22 @@ class UsuarioController {
     function getForm() {
         $this->usuarioView->showForm();
     }
+
     /**
      * Function to create a view and callign method showEmailForm()
      */
-    function emailForm(){
+    function emailForm() {
         require_once './lib/files/sessionManagement.php';
         require_once './lib/files/cookiesManagement.php';
         $this->usuarioView->showEmailForm();
     }
-    
-    function sendEmail(){
-        
+
+    function sendEmail() {
+
         require_once './lib/files/send.php';
     }
-    
-    function confirmationEmail(){
+
+    function confirmationEmail() {
         $this->usuarioView->showConfirmationEmail();
     }
 
@@ -57,13 +58,20 @@ class UsuarioController {
                     $this->handleSuccessfulLogin($user);
                 } else {
                     $this->handleWrongLogin();
-                //Mostrar un mensaje de error cuando la contraseña no coincida con la del user facilitado
+                    //Mostrar un mensaje de error cuando la contraseña no coincida con la del user facilitado
                 }
             } else {
                 $this->handleWrongLogin();
                 //mostar mensaje de error cuando el usuario no se encuentre en la base de datos
             }
         }
+    }
+
+    function logOut() {
+        session_start();
+        setcookie(session_id(), '', time() - 100, '/');
+        session_destroy();
+        header('Location:'.$_SERVER['PHP_SELF']);
     }
 
 //Funtions about cookies and sessions management***********************************************************************************************************
@@ -123,6 +131,4 @@ class UsuarioController {
         $postValues['password'] = hash('sha256', $postValues['password']);
         return $postValues;
     }
-
-   
 }

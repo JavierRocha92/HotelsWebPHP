@@ -68,6 +68,7 @@ class UsuarioView {
      */
     function showEmailForm() {
         ?>
+        <h2 class="cards__title">Enviamos un email contándonos lo que te ocurre</h2>
         <form class="form" action="<?= $_SERVER['PHP_SELF'] . '?controller=Usuario&action=sendEmail' ?>" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
