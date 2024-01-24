@@ -1,5 +1,6 @@
 <?php
 require_once 'HabitacionView.php';
+require_once 'lib/files/functions.php';
 
 class HotelView {
 
@@ -48,6 +49,20 @@ class HotelView {
             $habitacionView->showHabitaciones(array($hotel, $rooms));
             ?>
         </div>
+        <?php
+    }
+
+    function getErrorMessage($code) {
+        
+        switch ($code) {
+            case 1049 :
+                return "Lo sentimos, hubo un problema al acceder a la base de datos. Por favor, inténtalo de nuevo más tarde.";
+        }
+    }
+
+    function showError($data) {
+        ?>
+        <p><?= getErrorMessage($data['code']) ?></p>
         <?php
     }
 }

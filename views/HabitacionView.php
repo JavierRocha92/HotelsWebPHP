@@ -42,4 +42,12 @@ class HabitacionView {
         </div>
         <?php
     }
+
+    function showError($data) {
+        ?>
+        <p><?= $data['error'] ?></p>
+        <p><?= $data['code'] ?></p>
+
+        <?php
+    }
 }

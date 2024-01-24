@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/Hoteles_app/css/styles.css</file>
-            <file>file:/C:/xampp/htdocs/Hoteles_app/views/UsuarioView.php</file>
-            <file>file:/C:/xampp/htdocs/Hoteles_app/controllers/UsuarioController.php</file>
+            <file>file:/C:/xampp/htdocs/Hoteles_app/controllers/HabitacionController.php</file>
+            <file>file:/C:/xampp/htdocs/Hoteles_app/views/HabitacionView.php</file>
+            <file>file:/C:/xampp/htdocs/Hoteles_app/controllers/HotelController.php</file>
+            <file>file:/C:/xampp/htdocs/Hoteles_app/views/HotelView.php</file>
         </group>
     </open-files>
 </project-private>

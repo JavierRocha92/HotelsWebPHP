@@ -14,35 +14,86 @@ class UsuarioModel {
     }
 
     function getUsuarios() {
-        $sql = 'SELECT * FROM usuarios';
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
-        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Usuario');
-        $allUsers = $stmt->fetchAll();
-        $this->bd->disconnection();
-        return $allUsers;
+
+        try {
+            $sql = 'SELECT * FROM usuarios';
+            if (!is_array($this->pdo)) {
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute();
+                $stmt->setFetchMode(PDO::FETCH_CLASS, 'Usuario');
+                $allUsers = $stmt->fetchAll();
+                $this->bd->disconnection();
+                return $allUsers;
+            } else {
+                return $this->pdo;
+            }
+        } catch (PDOException $expdo) {
+            return array(
+                'code' => $expdo->getCode(),
+                'error' => true
+            );
+        } catch (Exception $exc) {
+            return array(
+                'code' => $exc->getCode(),
+                'error' => true
+            );
+        }
     }
 
-    function existsInDb($keyWord, $value, $table) {
-        $sql = "SELECT $keyWord from $table WHERE $keyWord = ?;";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute(array($value));
-        $exists = $stmt->fetch(PDO::FETCH_ASSOC);
-        $this->db->disconnection();
-        return $stmt;
+    function isExists($username) {
+        try {
+            $sql = "SELECT * from usuarios WHERE nombre = ?;";
+
+            if (!is_array($this->pdo)) {
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute(array($username));
+                $exists = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->db->disconnection();
+                return $exists;
+            } else {
+                return $this->pdo;
+            }
+        } catch (PDOException $expdo) {
+            return array(
+                'code' => $expdo->getCode(),
+                'error' => true
+            );
+        } catch (Exception $exc) {
+            return array(
+                'code' => $exc->getCode(),
+                'error' => true
+            );
+        }
     }
 
     function getUser($user, $password) {
-        $sql = "SELECT * from Usuarios WHERE nombre = ? and contraseña = ?";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute(array($user, $password));
-        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Usuario');
-        if ($stmt) {
-            $userObject = $stmt->fetch();
-            $this->db->disconnection();
-            return $userObject;
-        } else {
-            return false;
+        try {
+            $sql = "SELECT * from Usuarios WHERE nombre = ? and contraseña = ?";
+
+            if (!is_array($this->pdo)) {
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute(array($user, hash('sha256',$password)));
+                $stmt->setFetchMode(PDO::FETCH_CLASS, 'Usuario');
+                if ($stmt) {
+                    $userObject = $stmt->fetch();
+                    $this->db->disconnection();
+                    return $userObject;
+                } else {
+                    return false;
+                }
+            } else {
+                return $this->pdo;
+            }
+        } catch (PDOException $expdo) {
+            return array(
+                'code' => $expdo->getCode(),
+                'error' => true
+            );
+        } catch (Exception $exc) {
+            return array(
+                'code' => $exc->getCode(),
+                'error' => true
+            );
         }
     }
 }

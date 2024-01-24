@@ -94,4 +94,24 @@ class UsuarioView {
         <a href="<?= $_SERVER['PHP_SELF'] . '?controller=Hotel&action=listHotels' ?>">Volver a hoteles</a>
         <?php
     }
+
+    function getErrorMessage($code) {
+        switch ($code) {
+
+            case 1049 :
+                return "Lo sentimos, hubo un problema al acceder a la base de datos. Por favor, inténtalo de nuevo más tarde.";
+            case 42000:
+                return "Lo sentimos, ocurrió un error al procesar tu solicitud. Por favor, contacta al soporte técnico para obtener ayuda.";
+            case 23000:
+                return "Error al recuperar la información de las reservas. Por favor, intenta nuevamente más tarde.";
+            case 2002 :
+                return "Lo sentimos, hubo un problema al acceder a la base de datos. Por favor, inténtalo de nuevo más tarde.";
+        }
+    }
+
+    function showError($data) {
+        ?>
+        <p><?= getErrorMessage($data['code']) ?></p>
+        <?php
+    }
 }

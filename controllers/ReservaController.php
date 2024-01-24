@@ -19,11 +19,12 @@ class ReservaController {
         $allBookings = $this->reservaModel->getReservas($user->getId());
         $habitacionController = new HabitacionController();
         $rooms = $habitacionController->getHabitacionesByBooking($allBookings);
-        if ($rooms) {
+        if (!isset($rooms['error'])) {
             $this->log->loadUserAction('SELECT', 'YES');
             $this->reservaView->showReservas($allBookings, $rooms, $alert);
         } else {
             $this->log->loadUserAction('SELECT', 'NO');
+            $this->reservaView->showError($rooms);
         }
     }
 
@@ -51,21 +52,23 @@ class ReservaController {
         $booking = isset($_POST['booking']) ? unserialize(base64_decode($_POST['booking'])) : null;
         $habitacionController = new HabitacionController();
         $rooms = $habitacionController->listHabitaciones($booking->getId_hotel());
-        if ($rooms) {
+        if (!isset($rooms['eroror'])) {
             $this->log->loadUserAction('SELECT', 'YES');
             $this->reservaView->showUpdatingForm($booking, $rooms);
         } else {
             $this->log->loadUserAction('SELECT', 'NO');
+            $this->reservaView->showError($rooms);
         }
-        //hay que meter un objeto para hacer sonsulta sobre hoteles
     }
 
     function insertBooking($postValues) {
         global $user;
         $values = unserialize(base64_decode($postValues['values']));
         if (isset($values) && isset($user)) {
+
             $result = $this->reservaModel->insertReserva($values);
-            if ($result) {
+
+            if (!isset($result['error'])) {
                 $this->log->loadUserAction('INSERT', 'YES');
                 $this->listReservas(array(
                     'option' => 'insert',
@@ -73,6 +76,7 @@ class ReservaController {
                 );
             } else {
                 $this->log->loadUserAction('INSERT', 'NO');
+                $this->reservaView->showError($result);
             }
         }
     }
@@ -80,7 +84,7 @@ class ReservaController {
     function deleteBooking($booking_id) {
         if (isset($booking_id)) {
             $result = $this->reservaModel->deleteBooking($booking_id);
-            if ($result) {
+            if (!isset($result['error'])) {
                 $this->log->loadUserAction('DELETE', 'YES');
                 $this->listReservas(array(
                     'option' => 'delete',
@@ -88,6 +92,7 @@ class ReservaController {
                 );
             } else {
                 $this->log->loadUserAction('DELETE', 'NO');
+                $this->reservaView->showError($result);
             }
         }
     }
@@ -96,7 +101,7 @@ class ReservaController {
         $values = unserialize(base64_decode($postValues['values']));
         if (isset($values)) {
             $result = $this->reservaModel->updateBooking($values);
-            if ($result) {
+            if (!isset($result['error'])) {
                 $this->log->loadUserAction('UPDATE', 'YES');
                 $this->listReservas(array(
                     'option' => 'update',
@@ -104,21 +109,10 @@ class ReservaController {
                 );
             } else {
                 $this->log->loadUserAction('UPDATE', 'NO');
+                $this->reservaView->showError($result);
             }
         }
     }
-
-//    function handleReserva() {
-//        if (isset($_POST['option'])) {
-//            $option = htmlspecialchars($_POST['option']);
-//            if ($option == 'delete') {
-//                $this->reservaModel->deleteReserva($reserva_id);
-//            }
-//            if ($option == 'update') {
-//                //Logica para la modificacion de una reserva
-//            }
-//        }
-//    }
 
     function handleUserResponse() {
         global $user;

@@ -170,6 +170,10 @@ class ReservaView {
         <?php
     }
 
+    function showDatabaseError() {
+        
+    }
+
     function showUpdatingForm($booking, $rooms) {
         //TENEMOS QUE HACER UNA CONSULTA PARA MOSTAR EL NOMBRE DE LA HABITACION Y DEL HOTEL DE LA RESERVA PARA MOSTARSELO A UL USUAIRO,
         //LO MISMO HAY QUE HACER EN LSO DEMAS METODOS PARA BORRAR UNA RESERVA O PARA INSERTARLA
@@ -218,6 +222,24 @@ class ReservaView {
         </tr>
         </table>
 
+        <?php
+    }
+
+     function getErrorMessage($code) {
+         echo $code;
+         exit;
+    switch ($code) {
+
+        case 1049 :
+            return "Lo sentimos, hubo un problema al acceder a la base de datos. Por favor, inténtalo de nuevo más tarde.";
+        case 42000:
+            return "Lo sentimos, ocurrió un error al procesar tu solicitud. Por favor, contacta al soporte técnico para obtener ayuda.";
+    }
+}
+
+    function showError($data) {
+        ?>
+        <p><?= getErrorMessage($data['code']) ?></p>
         <?php
     }
 }

@@ -4,7 +4,7 @@
  */
 $bd_parameters = array(
  'host' => 'localhost',
- 'db_name' => 'booking',
+ 'db_name' => 'hoteles',
  'username' => 'root',
  'password' => ''
  );

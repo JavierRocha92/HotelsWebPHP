@@ -17,11 +17,12 @@ class HotelController {
 
     function listHotels() {
         $allHotels = $this->hotelModel->getHotels();
-        if ($allHotels) {
+        if (!isset($allHotels['error'])) {
             $this->hotelView->showHotels($allHotels);
             $this->log->loadUserAction('SELECT', 'YES');
         } else {
             $this->log->loadUserAction('SELECT', 'NO');
+            $this->hotelView->showError($allHotels);
         }
     }
 }

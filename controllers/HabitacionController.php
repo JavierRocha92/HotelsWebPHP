@@ -15,7 +15,7 @@ class HabitacionController {
 
     function listHabitaciones($hotel_id) {
         $allRooms = $this->habitacionModel->getHabitaciones($hotel_id);
-        if ($allRooms) {
+        if (!isset($allRooms['error'])) {
             $this->log->loadUserAction('SELECT', 'YES');
             return $allRooms;
         } else {
@@ -25,11 +25,12 @@ class HabitacionController {
 
     function getHabitacionesByBooking($bookings) {
         $bookings = $this->habitacionModel->getHabitacionesByBooking($bookings);
-        if ($bookings) {
+        if (!isset($bookings['error'])) {
             $this->log->loadUserAction('SELECT', 'YES');
             return $bookings;
         } else {
-            $this->log->loadUserAction('SELECT', 'YES');
+            $this->log->loadUserAction('SELECT', 'NO');
+            $this->habitacionView->showError($bookings);
         }
     }
 
@@ -37,12 +38,12 @@ class HabitacionController {
         $hotel_id = isset($_POST['hotel_id']) ? htmlspecialchars(($_POST['hotel_id'])) : null;
         $hotel_name = isset($_POST['hotel_name']) ? htmlspecialchars(($_POST['hotel_name'])) : null;
         $rooms = $this->habitacionModel->getHabitaciones($hotel_id);
-        if ($rooms) {
+        if (!isset($rooms['error'])) {
             $this->log->loadUserAction('SELECT', 'YES');
             $this->habitacionView->showHabitaciones($hotel_name, $hotel_id, $rooms);
         } else {
-            $this->log->loadUserAction('SELECT', 'YES');
+            $this->log->loadUserAction('SELECT', 'NO');
+            $this->habitacionView->showError($rooms);
         }
-        
     }
 }
