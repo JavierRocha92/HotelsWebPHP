@@ -5,14 +5,32 @@ require_once "objects/Habitacion.php";
 
 class HabitacionModel {
 
+    /**
+     * 
+     * @var Database object database to manage interaction to database
+     */
     private $db;
+
+    /**
+     * 
+     * @var PDO PDO object to storage dtabase connection obsject
+     */
     private $pdo;
 
+    /**
+     * Funtion to construct object
+     */
     function __construct() {
         $this->db = new Db();
         $this->pdo = $this->db->getConnection();
     }
 
+    /**
+     * Functio to fetch all habitacion object from database
+     * 
+     * @param type $hotel_id
+     * @return Array[Usuario] or Array with error information
+     */
     function getHabitaciones($hotel_id) {
         try {
             $sql = "SELECT * FROM habitaciones where id_hotel = ?;";
@@ -39,6 +57,12 @@ class HabitacionModel {
         }
     }
 
+    /**
+     * Function to fetch a specific Habitacion object take id_habitacion from reserva object as keyword
+     * 
+     * @param Array[Reserva] $allBookings
+     * @return Array[Usuario] or Array with error information
+     */
     function getHabitacionesByBooking($allBookings) {
 
         try {

@@ -3,16 +3,36 @@
 require_once './db/Db.php';
 require_once 'objects/Hotel.php';
 
+/**
+ * Class to represent hotel model object to fetch data from database
+ */
 class HotelModel {
 
+    /**
+     * 
+     * @var Database object database to manage interaction to database
+     */
     private $db;
+
+    /**
+     * 
+     * @var PDO PDO object to storage dtabase connection obsject
+     */
     private $pdo;
 
+    /**
+     * Funtion to construct object
+     */
     function __construct() {
         $this->db = new Db();
         $this->pdo = $this->db->getConnection();
     }
 
+    /**
+     * Function to fetch all hotels from database
+     * 
+     * @return Array[Usuario] or Array with error information
+     */
     function getHotels() {
 
 //            $image = file_get_contents('./assets/images/habitacion_id_3.jpg');
@@ -47,6 +67,12 @@ class HotelModel {
         }
     }
 
+    /**
+     * Function to fetch information about a specific hotel from databse take hotel_id as keyword
+     * 
+     * @param number $hotel_id
+     * @return Array[Usuario] or Array with error information
+     */
     function getHotel($hotel_id) {
 
         try {

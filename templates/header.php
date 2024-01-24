@@ -1,5 +1,6 @@
-
+<!--begin header-->
 <header class="header d-flex w-100 justify-content-center bg-body-tertiary">
+    <!--nav begin-->
     <nav class="navbar navbar-expand-lg bg-body-tertiary w-100">
         <div class="container-fluid">
             <a class="navbar-brand me-5" href="<?= $_SERVER['PHP_SELF'] . '?controller=Usuario&action=showForm' ?>">Home</a>
@@ -21,6 +22,8 @@
             </div>
         </div>
     </nav>
+    <!--end of nav-->
+    <!--Conditional to check if user exists to show info from him on header-->
     <?php
     if ($user) {
         ?>
@@ -35,5 +38,6 @@
     }
     ?>
 </header>
+<!--end onf header-->
 
 

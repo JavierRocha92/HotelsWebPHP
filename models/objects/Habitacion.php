@@ -1,36 +1,79 @@
 <?php
-class Habitacion{
-    private $id;
-    private $id_hotel;
-    private $num_habitacion;
-    private $tipo;
-    private $precio;
-    private $descripcion;
-    private $foto;
-    
-//       public function __construct(
-//        $id = false,
-//        $id_hotel = false,
-//        $num_habitacion = false,
-//        $tipo = false,
-//        $precio = false,
-//        $descripcion = false
-//    ) {
-//        $this->id = $id;
-//        $this->id_hotel = $id_hotel;
-//        $this->num_habitacion = $num_habitacion;
-//        $this->tipo = $tipo;
-//        $this->precio = $precio;
-//        $this->descripcion = $descripcion;
-//    }
-    
-    function __construct() {
 
+/**
+ * Class to represetn a room from a hotel
+ */
+class Habitacion {
+    /**
+     * Class properties
+     */
+
+    /**
+     * represent room id
+     * 
+     * @var number
+     */
+    private $id;
+
+    /**
+     * Repressent hotel id
+     * 
+     * @var number
+     */
+    private $hotel_id;
+
+    /**
+     * Represent number of room
+     * 
+     * @var number
+     */
+    private $room_number;
+
+    /**
+     * Represetn room type
+     * 
+     * @var string
+     */
+    private $type;
+
+    /**
+     * Represent price of a room
+     * 
+     * @var number
+     */
+    private $price;
+
+    /**
+     * Represent description room
+     * 
+     * @var string
+     */
+    private $description;
+
+    /**
+     * Represent image of a room
+     * 
+     * @var blob
+     */
+    private $photo;
+
+    /**
+     * Empty constructor (can be omitted if no specific actions are needed)
+     */
+    function __construct() {
+        // You can add initialization logic here if necessary
     }
-    
+
+    /**
+     * Magic method __toString to represent the room as a string
+     */
     public function __toString() {
-        return "Habitación [ID: {$this->id}, ID Hotel: {$this->id_hotel}, Número: {$this->num_habitacion}, Tipo: {$this->tipo}, Precio: {$this->precio}, Descripción: {$this->descripcion}]";
+        return "Room [ID: {$this->id}, Hotel ID: {$this->hotel_id}, Number: {$this->room_number}, Type: {$this->type}, Price: {$this->price}, Description: {$this->description}]";
     }
+
+    /**
+     * Access methods (getters and setters)
+     */
     public function getId() {
         return $this->id;
     }
@@ -39,7 +82,7 @@ class Habitacion{
         $this->id = $id;
     }
 
-        public function getId_hotel() {
+    public function getId_hotel() {
         return $this->id_hotel;
     }
 
@@ -78,7 +121,7 @@ class Habitacion{
     public function setDescripcion($descripcion): void {
         $this->descripcion = $descripcion;
     }
-    
+
     public function getFoto() {
         return $this->foto;
     }
@@ -86,7 +129,4 @@ class Habitacion{
     public function setFoto($foto): void {
         $this->foto = $foto;
     }
-
-
-    
 }

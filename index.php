@@ -25,15 +25,17 @@ require_once './lib/files/cookiesManagement.php';
     <body>
         <div class="container">
             <?php
-//PHP code to include header code
+            //include header code
             include_once './templates/header.php';
             ?>
             <main class="main p-5">
                 <?php
+                //Include frontcontroller
                 include './frontController.php';
                 ?>
             </main>
             <?php
+            //Inlduce footer
             include_once './templates/footer.php';
             ?>
         </div>

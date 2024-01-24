@@ -5,8 +5,14 @@ require_once './models/ReservaModel.php';
 require_once 'habitacionController.php';
 require_once './logs/models/LogUserAction.php';
 
+/**
+ * Class to represent a reserva controller oboject to take app control
+ */
 class ReservaController {
 
+    /**
+     * Fucntion to construct a new object
+     */
     function __construct() {
         $this->reservaView = new ReservaView();
         $this->reservaModel = new ReservaModel();
@@ -14,20 +20,31 @@ class ReservaController {
         $this->log = new LogUserAction($username);
     }
 
+    /**
+     * Function to take control about fetch and show all user from database
+     * 
+     * @global Usuario $user
+     * @param Array $alert
+     */
     function listReservas($alert = false) {
         global $user;
         $allBookings = $this->reservaModel->getReservas($user->getId());
         $habitacionController = new HabitacionController();
         $rooms = $habitacionController->getHabitacionesByBooking($allBookings);
         if (!isset($rooms['error'])) {
-            $this->log->loadUserAction('SELECT', 'YES');
-            $this->reservaView->showReservas($allBookings, $rooms, $alert);
+            if ($rooms != null) {
+                $this->log->loadUserAction('SELECT', 'YES');
+                $this->reservaView->showReservas($allBookings, $rooms, $alert);
+            }
         } else {
             $this->log->loadUserAction('SELECT', 'NO');
             $this->reservaView->showError($rooms);
         }
     }
 
+    /**
+     * Funnction to take control about handle confimation action from user
+     */
     function confirmForm() {
         $postValues = filter_input_array(INPUT_POST, $_POST);
         switch ($postValues['option']) {
@@ -43,11 +60,17 @@ class ReservaController {
         }
     }
 
+    /**
+     * Function to take control to show insertion form
+     */
     function insertForm() {
         $postValues = filter_input_array(INPUT_POST, $_POST);
         $this->reservaView->showInsertForm($postValues);
     }
 
+    /**
+     * Function to take control to show updating form
+     */
     function modifyForm() {
         $booking = isset($_POST['booking']) ? unserialize(base64_decode($_POST['booking'])) : null;
         $habitacionController = new HabitacionController();
@@ -61,6 +84,9 @@ class ReservaController {
         }
     }
 
+    /**
+     * Function to take control to insert a new reserva into database
+     */
     function insertBooking($postValues) {
         global $user;
         $values = unserialize(base64_decode($postValues['values']));
@@ -81,6 +107,9 @@ class ReservaController {
         }
     }
 
+    /**
+     * Function to take control to delete a new reserva into database
+     */
     function deleteBooking($booking_id) {
         if (isset($booking_id)) {
             $result = $this->reservaModel->deleteBooking($booking_id);
@@ -97,6 +126,9 @@ class ReservaController {
         }
     }
 
+    /**
+     * Function to take control to update a new reserva into database
+     */
     function updateBooking($postValues) {
         $values = unserialize(base64_decode($postValues['values']));
         if (isset($values)) {
@@ -114,6 +146,11 @@ class ReservaController {
         }
     }
 
+    /**
+     * Function to handle user response about confirma action
+     * 
+     * @global Usuario $user
+     */
     function handleUserResponse() {
         global $user;
         $room_id = isset($_POST['room_id']) ? htmlspecialchars($_POST['room_id']) : null;

@@ -3,8 +3,14 @@
 require './views/UsuarioView.php';
 require './models/UsuarioModel.php';
 
+/**
+ * Class to represente usuario controller object to manage control app
+ */
 class UsuarioController {
 
+    /**
+     * Function to contruct object
+     */
     function __construct() {
         $this->usuarioView = new UsuarioView();
         $this->usuarioModel = new UsuarioModel();
@@ -26,44 +32,26 @@ class UsuarioController {
         $this->usuarioView->showEmailForm();
     }
 
+    /**
+     * Function to take control about sending emails
+     */
     function sendEmail() {
         require_once './lib/files/send.php';
     }
 
+    /**
+     * Functoin to take control to show confirmation email form
+     */
     function confirmationEmail() {
         $this->usuarioView->showConfirmationEmail();
     }
 
     /**
-     * Funtion to porcess credential from a user are correct by calling other function and create session and cookies by calling other functions
-     * and finally redirect user to the next step (private area)
+     * Fucntion take control about fecth a specific Usuario
+     * 
+     * @param $_POST $postValues
+     * @return bool or Usuario
      */
-//    function logIn() {
-//        //Conditional to check if variables form post exist
-//        if (isset($_POST['username']) && isset($_POST['password'])) {
-//            $postValues = $this->processPost($_POST);
-//            //Calling function to check if user exist in database
-//            $exits = $this->usuarioModel->isExists($postValues['username']);
-//            if (!isset($exists['error'])) {
-//                //Create new user object by calling function to get a user if password and username match
-//                $user = $this->usuarioModel->getUser($postValues['username'], $postValues['password']);
-//                //Conditional to check is user has values
-//                if (!isset($user['error'])) {
-//                    if ($user) {
-//                        //Callign function to hcnadel successful login for user
-//                        $this->handleSuccessfulLogin($user);
-//                    } else {
-//                        $this->handleWrongLogin();
-//                        //Mostrar un mensaje de error cuando la contraseña no coincida con la del user facilitado
-//                    }
-//                }
-//            } else {
-//                $this->handleWrongLogin();
-//                //mostar mensaje de error cuando el usuario no se encuentre en la base de datos
-//            }
-//        }
-//    }
-
     function getUser($postValues) {
         $user = $this->usuarioModel->getUser($postValues['username'], $postValues['password']);
         if (!is_array($user)) {
@@ -74,6 +62,12 @@ class UsuarioController {
         }
     }
 
+    /**
+     * Function to take control about if user exists in database
+     * 
+     * @param $_POST $postValues
+     * @return bool
+     */
     function userExists($postValues) {
         $exists = $this->usuarioModel->isExists($postValues['username']);
         if (!isset($exists['error'])) {
@@ -84,10 +78,15 @@ class UsuarioController {
             }
         } else {
             $this->usuarioView->showError($exists);
-//            return false;
         }
     }
 
+    /**
+     * Fucntion to filter values from $_POST 
+     * 
+     * @param $_POST $post
+     * @return Array
+     */
     function filterPostValues($post) {
         if (isset($post['username']) && isset($post['password'])) {
             $post = filter_input_array(INPUT_POST, $post);
@@ -97,6 +96,9 @@ class UsuarioController {
         }
     }
 
+    /**
+     * Function to take control about login for a usuario obejct by calling other function 
+     */
     function logIn() {
         $postValues = $this->filterPostValues($_POST);
         $exists = $this->userExists($postValues);
@@ -114,6 +116,9 @@ class UsuarioController {
         }
     }
 
+    /**
+     * Function to destroy session  and cookie session created and redirect user to index
+     */
     function logOut() {
         session_start();
         setcookie(session_id(), '', time() - 100, '/');
@@ -158,6 +163,9 @@ class UsuarioController {
         header('Location:' . $_SERVER['PHP_SELF'] . '?controller=Hotel&action=listHotels');
     }
 
+    /**
+     * Fucntion to handle and redirect user to index if an error has occured in login
+     */
     function handleWrongLogin() {
         header('Location:' . $_SERVER['PHP_SELF'] . '?controller=Usuario&action=getForm&error');
     }

@@ -3,16 +3,36 @@
 require_once './db/Db.php';
 require_once 'objects/Reserva.php';
 
+/**
+ * Class to represent reverva model object to fetch info from database
+ */
 class ReservaModel {
 
+    /**
+     * 
+     * @var Database object database to manage interaction to database
+     */
     private $db;
+
+    /**
+     * 
+     * @var PDO PDO object to storage dtabase connection obsject
+     */
     private $pdo;
 
+    /**
+     * Funtion to construct object
+     */
     function __construct() {
         $this->db = new Db();
         $this->pdo = $this->db->getConnection();
     }
 
+    /**
+     * 
+     * @param number $user_id
+     * @return Array[Usuario] or Array with error information
+     */
     function getReservas($user_id) {
         try {
             $sql = 'SELECT * FROM reservas WHERE id_usuario = ?';
@@ -39,6 +59,13 @@ class ReservaModel {
         }
     }
 
+    /**
+     * Function to insert a new Reserva into database
+     * 
+     * @global Usuario $user
+     * @param $_POST $postValues
+     * @return Array[Usuario] or Array with error information
+     */
     function insertReserva($postValues) {
         global $user;
         $initDate = date("Y-m-d", strtotime($postValues['fecha_entrada']));
@@ -78,6 +105,12 @@ class ReservaModel {
         }
     }
 
+    /**
+     * Function to delete a specific Reserva from databse take bookin_id given as keyword
+     * 
+     * @param number $booking_id
+     * @return Array[Usuario] or Array with error information
+     */
     function deleteBooking($booking_id) {
         try {
             $sql = "DELETE FROM reservas WHERE id = ?";
@@ -102,6 +135,12 @@ class ReservaModel {
         }
     }
 
+    /**
+     * Function to modifiy data for a specific reserva object take %Values as keyword
+     * 
+     * @param Array $values
+     * @return Array[Usuario] or Array with error information
+     */
     function updateBooking($values) {
         //format date to mysql
         $fecha_entrada = date("Y-m-d", strtotime($values['fecha_entrada']));
@@ -137,4 +176,3 @@ class ReservaModel {
         }
     }
 }
-

@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\Exception;
 require './lib/files/phpmailer/src/Exception.php';
 require './lib/files/phpmailer/src/PHPMailer.php';
 require './lib/files/phpmailer/src/SMTP.php';
-require '../config/config.php';
+require './config/config.php';
 
 //Conditonal to check if POST['send'] exists
 
