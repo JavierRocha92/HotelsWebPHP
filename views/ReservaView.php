@@ -129,7 +129,7 @@ class ReservaView {
                 <td><input type="hidden" name="room_id" value="<?= $postValues['room_id'] ?>"></td>
                 <td><input type="hidden" name="hotel_name" value="<?= $postValues['hotel_name'] ?>"></td>
                 <td><input type="hidden" name="room_type" value="<?= $postValues['room_type'] ?>"></td>
-                <td><button class="btn bg-primary text-light" name="option" value="insert">Reservar</button></td>
+                <td><button class="btn bg-primary text-light" name="option" value="insert">To Book</button></td>
             </form>
 
             <td></td>
@@ -156,8 +156,8 @@ class ReservaView {
         </div>
         <form action="<?= $_SERVER['PHP_SELF'] . '?controller=Reserva&action=handleUserResponse' ?>" method="post">
             <input type="hidden" name="booking_id" value="<?= $booking->getId() ?>">
-            <button class="btn bg-primary text-light" name="response" value="yes"> Eliminar </button>
-            <button class="btn bg-primary text-light" name="response" value="no"> Volver </button>
+            <button class="btn bg-primary text-light" name="response" value="yes"> Delete </button>
+            <button class="btn bg-primary text-light" name="response" value="no"> Back </button>
             <input type="hidden" name="option" value="delete">
         </form>
         <?php
@@ -177,8 +177,8 @@ class ReservaView {
         </div>
         <form action="<?= $_SERVER['PHP_SELF'] . '?controller=Reserva&action=handleUserResponse' ?>" method="post">
             <input type="hidden" name="values" value="<?= base64_encode(serialize($values)) ?>">
-            <button class="btn bg-primary text-light" name="response" value="yes"> Modificar </button>
-            <button class="btn bg-primary text-light" name="response" value="no"> Volver </button>
+            <button class="btn bg-primary text-light" name="response" value="yes"> Modify </button>
+            <button class="btn bg-primary text-light" name="response" value="no"> Back </button>
             <input type="hidden" name="option" value="update">
         </form>
         <?php
@@ -197,8 +197,8 @@ class ReservaView {
             <p>Con fecha de entrada en : <?= $values['fecha_entrada'] ?> y con fecha de salida en : <?= $values['fecha_salida'] ?></p>
         </div>
         <form action="<?= $_SERVER['PHP_SELF'] . '?controller=Reserva&action=handleUserResponse' ?>" method="post">
-            <button class="btn bg-primary text-light" name="response" value="yes"> Reservar </button>
-            <button class="btn bg-primary text-light" name="response" value="no"> Volver </button>
+            <button class="btn bg-primary text-light" name="response" value="yes"> To Book </button>
+            <button class="btn bg-primary text-light" name="response" value="no"> Back </button>
             <input type="hidden" name="option" value="insert">
             <input type="hidden" name="values" value="<?= base64_encode(serialize($values)) ?>">
 
@@ -213,8 +213,6 @@ class ReservaView {
      * @param Array[Habitacion] $rooms
      */
     function showUpdatingForm($booking, $rooms) {
-        //TENEMOS QUE HACER UNA CONSULTA PARA MOSTAR EL NOMBRE DE LA HABITACION Y DEL HOTEL DE LA RESERVA PARA MOSTARSELO A UL USUAIRO,
-        //LO MISMO HAY QUE HACER EN LSO DEMAS METODOS PARA BORRAR UNA RESERVA O PARA INSERTARLA
         ?>
         <h2>Indica los cambios que quieres realizar en tu reserva</h2>
         <table>
@@ -250,7 +248,7 @@ class ReservaView {
                     <button class="btn bg-primary text-light" name="response" value="yes"> Modificar </button>
                 </td>
                 <td>
-                    <button class="btn bg-primary text-light" name="response" value="no"> Volver </button>
+                    <button class="btn bg-primary text-light" name="response" value="no"> Back </button>
                 </td>
                 <input type="hidden" name="booking_id" value="<?= $booking->getId() ?>">
                 <input type="hidden" name="option" value="update">

@@ -43,7 +43,7 @@ class HabitacionController {
      */
     function getHabitacionesByBooking($bookings) {
         $rooms = $this->habitacionModel->getHabitacionesByBooking($bookings);
-        if (!isset($bookings['error'])) {
+        if (!isset($rooms['error'])) {
             $this->log->loadUserAction('SELECT', 'YES');
             return $rooms;
         } else {

@@ -20,7 +20,11 @@ class UsuarioController {
      * Function to create UsuarioView object and call it specifuc funtion  showForm() to show a login form
      */
     function getForm() {
-        $this->usuarioView->showForm();
+        global $user;
+        if($user == null){
+            $this->usuarioView->showForm();
+        }
+        
     }
 
     /**

@@ -33,7 +33,7 @@ class HabitacionView {
                             <input type="hidden" name="hotel_id" value="<?= $hotel_id ?>">
                             <input type="hidden" name="hotel_name" value="<?= $hotel_name ?>">
 
-                            <button class="btn bg-primary text-light" type="submit">Reservar</button>
+                            <button class="btn bg-primary text-light" type="submit">To Book</button>
                         </form>
                         <!--final form hotel-->
                     </div>

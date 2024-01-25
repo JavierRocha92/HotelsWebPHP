@@ -15,9 +15,9 @@ if (isset($user)) {
 //Conditional to check if user is set
 if ($user == null) {
     //Conditinal to check if $_GET is set
-    if (count($_GET) > 1) {
+    if (!empty($_GET)) {
         $getValues = filter_input_array(INPUT_GET, $_GET);
-        if ($getValues['controller'] != 'Usuario' && ($getValues['action'] != 'getForm' || $getValues['action'] != 'logIn')) {
+        if (!($getValues['controller'] == 'Usuario' && ($getValues['action'] == 'getForm' || $getValues['action'] == 'logIn'))) {
             //Redirect and show form again to user to login 
             header('Location: ' . $_SERVER['PHP_SELF']);
         }

@@ -46,7 +46,7 @@ class UsuarioView {
                 <input type = "text" name = "username" required class = "form__input--index" placeholder = "Type your username">
                 <input type = "password" name = "password" required class = "form__input--index" placeholder = "Type your password">
                 <div class = "center_row checkbox">
-                    <input type = "checkbox" name = "terms" class = "form__input--index form__input--checkbox">
+                    <input type = "checkbox" id="terms" name = "terms" class = "form__input--index form__input--checkbox">
                     <label class = "form__label" for = "terms">Remember me</label>
                 </div>
                 <button class = "form__input--index form__button--index" type = "submit">Log in</button>
@@ -58,6 +58,7 @@ class UsuarioView {
             </div>
         </div>
         <?php
+        
     }
 
     /**
@@ -77,7 +78,7 @@ class UsuarioView {
             </div>
             <div class="mb-3">
                 <label for="content" class="form-label">Content</label>
-                <textarea type="text" name="content" class="form-control" id="content" placeholder="Hi, my name is..."></textarea>
+                <textarea name="content" class="form-control" id="content" placeholder="Hi, my name is..."></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -91,7 +92,7 @@ class UsuarioView {
     function showConfirmationEmail() {
         ?> 
         <p>El correo se ha enviado con exito</p>
-        <a href="<?= $_SERVER['PHP_SELF'] . '?controller=Hotel&action=listHotels' ?>">Volver a hoteles</a>
+        <a href="<?= $_SERVER['PHP_SELF'] . '?controller=Hotel&action=listHotels' ?>">Back To Hotels</a>
         <?php
     }
 
@@ -128,7 +129,7 @@ class UsuarioView {
             </div>
             <div class="card-body">
                 <p class="card-text"><?= getErrorMessage($data['code']) ?>.</p>
-                <a href="<?= $_SERVER['PHP_SELF'] . '?controller=Usuario&action=logOut' ?>" class="btn btn-primary">Volver</a>
+                <a href="<?= $_SERVER['PHP_SELF'] . '?controller=Usuario&action=logOut' ?>" class="btn btn-primary">Go Back</a>
             </div>
         </div>
         <?php

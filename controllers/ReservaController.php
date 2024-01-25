@@ -31,6 +31,8 @@ class ReservaController {
         $allBookings = $this->reservaModel->getReservas($user->getId());
         $habitacionController = new HabitacionController();
         $rooms = $habitacionController->getHabitacionesByBooking($allBookings);
+//        print_r($rooms);
+//        exit;
         if (!isset($rooms['error'])) {
             if ($rooms != null) {
                 $this->log->loadUserAction('SELECT', 'YES');

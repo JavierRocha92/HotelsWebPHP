@@ -19,7 +19,7 @@ class HotelView {
             foreach ($allHotels as $hotel) {
                 ?>
                 <div class="card" style="width: 18rem;">
-                    <img src="data:image/png;base64, <?= base64_encode($hotel->getFoto()) ?>" class="card-img-top" alt="...">
+                    <img src="data:image/png;base64,<?= base64_encode($hotel->getFoto()) ?>" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title"><?= $hotel->getNombre() ?></h5>
                         <h6>Habitaciones: <?= $hotel->getNum_habitaciones() ?></h6>

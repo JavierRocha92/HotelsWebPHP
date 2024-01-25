@@ -35,15 +35,8 @@ class HotelModel {
      */
     function getHotels() {
 
-//            $image = file_get_contents('./assets/images/habitacion_id_3.jpg');
-//            echo $image;
-//            exit;
-//            $stmt = $this->pdo->prepare('UPDATE habitaciones SET foto = ? WHERE id = 3');
-//            $stmt->bindParam(1, $image, PDO::PARAM_LOB);
-//            $stmt->execute();
-
         try {
-            $sql = "SELECT * FROM hoteles where id";
+            $sql = "SELECT * FROM hoteles";
             if (!is_array($this->pdo)) {
                 $stmt = $this->pdo->prepare($sql);
                 $stmt->execute();

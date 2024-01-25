@@ -20,42 +20,42 @@ class Habitacion {
      * 
      * @var number
      */
-    private $hotel_id;
+    private $id_hotel;
 
     /**
      * Represent number of room
      * 
      * @var number
      */
-    private $room_number;
+    private $num_habitacion;
 
     /**
      * Represetn room type
      * 
      * @var string
      */
-    private $type;
+    private $tipo;
 
     /**
      * Represent price of a room
      * 
      * @var number
      */
-    private $price;
+    private $precio;
 
     /**
      * Represent description room
      * 
      * @var string
      */
-    private $description;
+    private $descripcion;
 
     /**
      * Represent image of a room
      * 
      * @var blob
      */
-    private $photo;
+    private $foto;
 
     /**
      * Empty constructor (can be omitted if no specific actions are needed)

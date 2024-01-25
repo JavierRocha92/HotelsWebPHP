@@ -70,9 +70,9 @@ class ReservaModel {
         global $user;
         $initDate = date("Y-m-d", strtotime($postValues['fecha_entrada']));
         $finalDate = date("Y-m-d", strtotime($postValues['fecha_salida']));
+        $sql = 'INSERT INTO Reservas (id_usuario, id_hotel, id_habitacion, fecha_entrada, fecha_salida) VALUES (?, ?, ?, ? ,?)';
 
         try {
-            $sql = 'INSERT INTO Reservas (id, id_usuario, id_hotel, id_habitacion,fecha_entrada, fecha_salida) VALUES (?, ?, ?, ?, ? ,?)';
 
             if (!is_array($this->pdo)) {
 
@@ -80,7 +80,6 @@ class ReservaModel {
 
                 $stmt->execute(
                         array(
-                            1,
                             $user->getId(),
                             $postValues['hotel_id'],
                             $postValues['room_id'],
@@ -104,6 +103,8 @@ class ReservaModel {
             );
         }
     }
+
+
 
     /**
      * Function to delete a specific Reserva from databse take bookin_id given as keyword

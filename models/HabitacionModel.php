@@ -64,21 +64,25 @@ class HabitacionModel {
      * @return Array[Usuario] or Array with error information
      */
     function getHabitacionesByBooking($allBookings) {
+//        print_r($allBookings);
+//        exit;
 
         try {
             $rooms = array();
-            foreach ($allBookings as $booking) {
-                $sql = "SELECT * FROM habitaciones WHERE ID = ?";
-                if (!is_array($this->pdo)) {
+            $sql = "SELECT * FROM habitaciones WHERE ID = ?";
+            if (!is_array($this->pdo)) {
+                foreach ($allBookings as $booking) {
+
                     $stmt = $this->pdo->prepare($sql);
                     $stmt->execute(array($booking->getId_habitacion()));
                     $stmt->setFetchMode(PDO::FETCH_CLASS, 'Habitacion');
                     array_push($rooms, $stmt->fetch());
                     $this->db->disconnection();
-                    return $rooms;
-                } else {
-                    return $this->pdo;
                 }
+
+                return $rooms;
+            } else {
+                return $this->pdo;
             }
         } catch (PDOException $expdo) {
             return array(
