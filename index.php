@@ -26,7 +26,7 @@ require_once './lib/files/cookiesManagement.php';
         <div class="container">
             <?php
             //include header code
-            include_once './templates/header.php';
+            include_once './views/templates/header.php';
             ?>
             <main class="main p-5">
                 <?php
@@ -36,7 +36,7 @@ require_once './lib/files/cookiesManagement.php';
             </main>
             <?php
             //Inlduce footer
-            include_once './templates/footer.php';
+            include_once './views/templates/footer.php';
             ?>
         </div>
         <!--End of the container-->

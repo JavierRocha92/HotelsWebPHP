@@ -86,6 +86,20 @@ class ReservaController {
         }
     }
 
+    function datesRight($initial, $final) {
+        $format_initial = new DateTime($initial);
+        $format_final = new DateTime($final);
+        $current = new DateTime();
+
+        if ($format_final < $format_initial) {
+            return false;
+        }
+        if ($format_initial < $current) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Function to take control to insert a new reserva into database
      */
@@ -93,6 +107,15 @@ class ReservaController {
         global $user;
         $values = unserialize(base64_decode($postValues['values']));
         if (isset($values) && isset($user)) {
+            //Calling function to check if dates are right
+
+            if (!$this->datesRight($values['fecha_entrada'], $values['fecha_salida'])) {
+                $this->reservaView->showError(array(
+                    'code' => 0001,
+                    'error' => true
+                ));
+                return;
+            }
 
             $result = $this->reservaModel->insertReserva($values);
 

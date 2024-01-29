@@ -229,13 +229,13 @@ class ReservaView {
                 </td>
                 <td>
                     <select name="room_id">
-        <?php
-        foreach ($rooms as $room) {
-            ?>
+                        <?php
+                        foreach ($rooms as $room) {
+                            ?>
                             <option name="room_id" value="<?= $room->getId() ?>"><?= $room->getTipo() ?></option>
-            <?php
-        }
-        ?>
+                            <?php
+                        }
+                        ?>
                     </select>
                 </td>
                 <td>
@@ -278,6 +278,10 @@ class ReservaView {
                 return "Error al recuperar la información de las reservas. Por favor, intenta nuevamente más tarde.";
             case 2002 ://error connection databse
                 return "Lo sentimos, hubo un problema al acceder a la base de datos. Por favor, inténtalo de nuevo más tarde.";
+            case 0001:
+                return "Por favor, asegúrate de ingresar las fechas de reserva de manera correcta. La fecha de salida debe ser posterior a la fecha de entrada, y la fecha de entrada debe ser al menos el día de hoy. Esto garantizará una reserva válida. Gracias por tu cooperación.";
+            default:
+                return 'La aplicación esta en labores de mantenimiento, disculpe las molestias.';
         }
     }
 

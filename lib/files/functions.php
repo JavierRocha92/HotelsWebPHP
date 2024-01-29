@@ -13,6 +13,10 @@ function getErrorMessage($code) {
             return "La aplicación esta en labores de mantenimineto, intentelo mas tarde";
         case '21S01':
             return "La fecha de salida debe de ser posterior a la de entrada.";
+        case 0001:
+            return "Por favor, asegúrate de ingresar las fechas de reserva de manera correcta. La fecha de salida debe ser posterior a la fecha de entrada, y la fecha de entrada debe ser al menos el día de hoy. Esto garantizará una reserva válida. Gracias por tu cooperación.";
+        default:
+            return 'La aplicación esta en labores de mantenimiento, disculpe las molestias.';
     }
 }
 
