@@ -5,6 +5,9 @@
  */
 class UsuarioView {
 
+    /**
+     * Function to show a login form on screen
+     */
     function showForm() {
         ?>
         <!--container for login form-->
@@ -58,7 +61,54 @@ class UsuarioView {
             </div>
         </div>
         <?php
-        
+    }
+
+    /**
+     * Function to show a visor images on screen
+     */
+    function showVisor() {
+        ?>
+        <h1 class="mb-2">You chose whenever, whatever and wherever</h1>
+        <div id="carouselExampleCaptions" class="carousel slide">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./assets/images/visor_hotel_1.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <a class="text-decoration-none text-light" href="<?= $_SERVER['PHP_SELF'] . '?controller=Hotel&action=listHotels' ?>">
+                            <h5>Hotels available all over the world</h5></a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/images/visor_room_1.webp" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <a class="text-decoration-none text-light" href="<?= $_SERVER['PHP_SELF'] . '?controller=Hotel&action=listHotels' ?>">
+                            <h5>Pick rooms which providing what you need</h5></a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/images/visor_tranfer.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <a class="text-decoration-none text-light" href="<?= $_SERVER['PHP_SELF'] . '?controller=Usuario&action=emailForm' ?>">
+                            <h5>Faster, cheaper and easier than others companies</h5></a>
+                        
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <?php
     }
 
     /**

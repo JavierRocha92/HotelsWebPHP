@@ -23,6 +23,8 @@ class UsuarioController {
         global $user;
         if($user == null){
             $this->usuarioView->showForm();
+        }else{
+            $this->usuarioView->showVisor();
         }
         
     }

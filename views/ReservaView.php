@@ -73,7 +73,7 @@ class ReservaView {
         $option = $alert['option'];
         $result = $alert['result'];
         $message;
-        if ($result) {
+        if ($result !=null) {
             switch ($option) {
                 case 'delete':
                     $message = "Tu reserva, numero $result se ha eliminado con exito";
@@ -193,7 +193,7 @@ class ReservaView {
         ?>
         <h2>Haz click aquí para confirmar la  reserva</h2>
         <div class="data">
-            <p>Reserva para habitacion con id: <?= $values['room_id'] ?></p>
+            <p>Reserva para habitacion : <?= $values['room_type'] ?> para el hotel  <?= $values['hotel_name'] ?> </p>
             <p>Con fecha de entrada en : <?= $values['fecha_entrada'] ?> y con fecha de salida en : <?= $values['fecha_salida'] ?></p>
         </div>
         <form action="<?= $_SERVER['PHP_SELF'] . '?controller=Reserva&action=handleUserResponse' ?>" method="post">

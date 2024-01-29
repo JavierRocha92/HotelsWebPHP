@@ -33,7 +33,7 @@ class ReservaController {
         $rooms = $habitacionController->getHabitacionesByBooking($allBookings);
 //        print_r($rooms);
 //        exit;
-        if (!isset($rooms['error'])) {
+        if (!isset($rooms['error']) || !isset($allBookings['error'])) {
             if ($rooms != null) {
                 $this->log->loadUserAction('SELECT', 'YES');
                 $this->reservaView->showReservas($allBookings, $rooms, $alert);
@@ -85,7 +85,13 @@ class ReservaController {
             $this->reservaView->showError($rooms);
         }
     }
-
+    /**
+     * Function to compare two dates given as parameter return false if final is sooner than initial or initial is sooner than curren time
+     * 
+     * @param string $initial
+     * @param string $final
+     * @return bool
+     */
     function datesRight($initial, $final) {
         $format_initial = new DateTime($initial);
         $format_final = new DateTime($final);
