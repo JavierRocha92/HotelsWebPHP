@@ -2,6 +2,7 @@
 <?php
 require_once './lib/files/sessionManagement.php';
 require_once './lib/files/cookiesManagement.php';
+require_once './lib/files/functions.php';
 ?>
 <!doctype html>
 <html lang="en">

@@ -20,7 +20,7 @@ function getErrorMessage($code) {
     }
 }
 
-function showError($data) {
+function showDatabaseError($data) {
     ?>
     <div class="card">
         <div class="card-header">

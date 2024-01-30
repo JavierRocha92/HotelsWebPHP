@@ -95,7 +95,7 @@ class UsuarioView {
                     <div class="carousel-caption d-none d-md-block">
                         <a class="text-decoration-none text-light" href="<?= $_SERVER['PHP_SELF'] . '?controller=Usuario&action=emailForm' ?>">
                             <h5>Faster, cheaper and easier than others companies</h5></a>
-                        
+
                     </div>
                 </div>
             </div>
@@ -147,41 +147,11 @@ class UsuarioView {
     }
 
     /**
-     * Fucntion to catch type of error given as prameter and return a properly message error
-     * 
-     * @param number $code error code
-     * @return string error message to show to user
-     */
-    function getErrorMessage($code) {
-        switch ($code) {
-
-            case 1049 : //error databse attributes are wrong
-                return "Lo sentimos, hubo un problema al acceder a la base de datos. Por favor, inténtalo de nuevo más tarde.";
-            case 42000://sintaxis sql error
-                return "Lo sentimos, ocurrió un error al procesar tu solicitud. Por favor, contacta al soporte técnico para obtener ayuda.";
-            case 23000://violation key
-                return "Error al recuperar la información de las reservas. Por favor, intenta nuevamente más tarde.";
-            case 2002 ://error connection databse
-                return "Lo sentimos, hubo un problema al acceder a la base de datos. Por favor, inténtalo de nuevo más tarde.";
-        }
-    }
-
-    /**
      * Function to print a card out screen to shoe information abour any problem occured
      * 
      * @param array $data contains error = true and code error number
      */
     function showError($data) {
-        ?>
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title">Disculpe las molestias.</h5>
-            </div>
-            <div class="card-body">
-                <p class="card-text"><?= getErrorMessage($data['code']) ?>.</p>
-                <a href="<?= $_SERVER['PHP_SELF'] . '?controller=Usuario&action=logOut' ?>" class="btn btn-primary">Go Back</a>
-            </div>
-        </div>
-        <?php
+        showDatabaseError($data);
     }
 }
